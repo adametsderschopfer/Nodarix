@@ -1,0 +1,91 @@
+[2021-6-30 23:18:4] -PID=>1840- [INFO {1840] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:4] -PID=>1840- [INFO {1840] [MODULE::ThreadControl] => Master 1840 is running
+[2021-6-30 23:18:5] -PID=>12312- [INFO {12312] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:5] -PID=>12312- [INFO {12312] [MODULE::ThreadControl] => Worker 12312 started
+[2021-6-30 23:18:5] -PID=>10952- [INFO {10952] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:5] -PID=>10952- [INFO {10952] [MODULE::ThreadControl] => Worker 10952 started
+[2021-6-30 23:18:5] -PID=>10432- [INFO {10432] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:5] -PID=>10432- [INFO {10432] [MODULE::ThreadControl] => Worker 10432 started
+[2021-6-30 23:18:5] -PID=>12828- [INFO {12828] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:5] -PID=>12828- [INFO {12828] [MODULE::ThreadControl] => Worker 12828 started
+[2021-6-30 23:18:14] -PID=>7780- [INFO {7780] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:14] -PID=>7780- [INFO {7780] [MODULE::ThreadControl] => Master 7780 is running
+[2021-6-30 23:18:14] -PID=>9284- [INFO {9284] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:14] -PID=>10148- [INFO {10148] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:14] -PID=>9284- [INFO {9284] [MODULE::ThreadControl] => Worker 9284 started
+[2021-6-30 23:18:14] -PID=>10148- [INFO {10148] [MODULE::ThreadControl] => Worker 10148 started
+[2021-6-30 23:18:14] -PID=>8372- [INFO {8372] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:14] -PID=>8372- [INFO {8372] [MODULE::ThreadControl] => Worker 8372 started
+[2021-6-30 23:18:14] -PID=>8308- [INFO {8308] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:14] -PID=>8308- [INFO {8308] [MODULE::ThreadControl] => Worker 8308 started
+[2021-6-30 23:18:14] -PID=>7780- [INFO {7780] [MODULE::ThreadControl] => worker is dead true
+[2021-6-30 23:18:48] -PID=>9412- [INFO {9412] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:48] -PID=>9412- [INFO {9412] [MODULE::ThreadControl] => Master 9412 is running
+[2021-6-30 23:18:49] -PID=>7324- [INFO {7324] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:49] -PID=>7324- [INFO {7324] [MODULE::ThreadControl] => Worker 7324 started
+[2021-6-30 23:18:49] -PID=>8412- [INFO {8412] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:49] -PID=>8412- [INFO {8412] [MODULE::ThreadControl] => Worker 8412 started
+[2021-6-30 23:18:49] -PID=>7844- [INFO {7844] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:49] -PID=>7844- [INFO {7844] [MODULE::ThreadControl] => Worker 7844 started
+[2021-6-30 23:18:49] -PID=>7328- [INFO {7328] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:18:49] -PID=>7328- [INFO {7328] [MODULE::ThreadControl] => Worker 7328 started
+[2021-6-30 23:20:57] -PID=>11500- [INFO {11500] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:20:57] -PID=>11500- [INFO {11500] [MODULE::ThreadControl] => Master 11500 is running
+[2021-6-30 23:20:57] -PID=>8216- [INFO {8216] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:20:57] -PID=>8216- [INFO {8216] [MODULE::ThreadControl] => Worker 8216 started
+[2021-6-30 23:20:57] -PID=>1216- [INFO {1216] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:20:57] -PID=>1216- [INFO {1216] [MODULE::ThreadControl] => Worker 1216 started
+[2021-6-30 23:20:57] -PID=>5568- [INFO {5568] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:20:57] -PID=>5568- [INFO {5568] [MODULE::ThreadControl] => Worker 5568 started
+[2021-6-30 23:20:57] -PID=>10160- [INFO {10160] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:20:57] -PID=>10160- [INFO {10160] [MODULE::ThreadControl] => Worker 10160 started
+[2021-6-30 23:21:2] -PID=>2936- [INFO {2936] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:2] -PID=>2936- [INFO {2936] [MODULE::ThreadControl] => Master 2936 is running
+[2021-6-30 23:21:2] -PID=>9832- [INFO {9832] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:2] -PID=>9832- [INFO {9832] [MODULE::ThreadControl] => Worker 9832 started
+[2021-6-30 23:21:2] -PID=>8892- [INFO {8892] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:2] -PID=>8892- [INFO {8892] [MODULE::ThreadControl] => Worker 8892 started
+[2021-6-30 23:21:2] -PID=>5832- [INFO {5832] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:2] -PID=>5832- [INFO {5832] [MODULE::ThreadControl] => Worker 5832 started
+[2021-6-30 23:21:2] -PID=>9748- [INFO {9748] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:2] -PID=>9748- [INFO {9748] [MODULE::ThreadControl] => Worker 9748 started
+[2021-6-30 23:21:21] -PID=>3580- [INFO {3580] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:21] -PID=>3580- [INFO {3580] [MODULE::ThreadControl] => Master 3580 is running
+[2021-6-30 23:21:21] -PID=>13120- [INFO {13120] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:21] -PID=>13120- [INFO {13120] [MODULE::ThreadControl] => Worker 13120 started
+[2021-6-30 23:21:21] -PID=>5224- [INFO {5224] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:21] -PID=>5224- [INFO {5224] [MODULE::ThreadControl] => Worker 5224 started
+[2021-6-30 23:21:21] -PID=>11616- [INFO {11616] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:21] -PID=>11616- [INFO {11616] [MODULE::ThreadControl] => Worker 11616 started
+[2021-6-30 23:21:21] -PID=>9824- [INFO {9824] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:21] -PID=>9824- [INFO {9824] [MODULE::ThreadControl] => Worker 9824 started
+[2021-6-30 23:21:24] -PID=>1352- [INFO {1352] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:24] -PID=>1352- [INFO {1352] [MODULE::ThreadControl] => Master 1352 is running
+[2021-6-30 23:21:24] -PID=>12808- [INFO {12808] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:24] -PID=>12808- [INFO {12808] [MODULE::ThreadControl] => Worker 12808 started
+[2021-6-30 23:21:24] -PID=>12996- [INFO {12996] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:24] -PID=>12996- [INFO {12996] [MODULE::ThreadControl] => Worker 12996 started
+[2021-6-30 23:21:24] -PID=>7812- [INFO {7812] [MODULE::ThreadControl] => Worker 7812 started
+[2021-6-30 23:21:24] -PID=>7812- [INFO {7812] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:24] -PID=>5864- [INFO {5864] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:21:24] -PID=>5864- [INFO {5864] [MODULE::ThreadControl] => Worker 5864 started
+[2021-6-30 23:32:54] -PID=>11052- [INFO {11052] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:32:54] -PID=>11052- [INFO {11052] [MODULE::ThreadControl] => Master 11052 is running
+[2021-6-30 23:32:54] -PID=>8060- [INFO {8060] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:32:54] -PID=>8060- [INFO {8060] [MODULE::ThreadControl] => Worker 8060 started
+[2021-6-30 23:32:54] -PID=>6508- [INFO {6508] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:32:54] -PID=>6508- [INFO {6508] [MODULE::ThreadControl] => Worker 6508 started
+[2021-6-30 23:32:54] -PID=>9756- [INFO {9756] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:32:54] -PID=>9756- [INFO {9756] [MODULE::ThreadControl] => Worker 9756 started
+[2021-6-30 23:32:54] -PID=>12592- [INFO {12592] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:32:54] -PID=>12592- [INFO {12592] [MODULE::ThreadControl] => Worker 12592 started
+[2021-6-30 23:58:14] -PID=>11656- [INFO {11656] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:58:14] -PID=>11656- [INFO {11656] [MODULE::ThreadControl] => Master 11656 is running
+[2021-6-30 23:58:14] -PID=>8836- [INFO {8836] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:58:14] -PID=>8836- [INFO {8836] [MODULE::ThreadControl] => Worker 8836 started
+[2021-6-30 23:58:14] -PID=>5712- [INFO {5712] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:58:14] -PID=>5712- [INFO {5712] [MODULE::ThreadControl] => Worker 5712 started
+[2021-6-30 23:58:14] -PID=>2908- [INFO {2908] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:58:14] -PID=>2908- [INFO {2908] [MODULE::ThreadControl] => Worker 2908 started
+[2021-6-30 23:58:14] -PID=>7244- [INFO {7244] [MODULE::__CONFIG] => was initialize
+[2021-6-30 23:58:14] -PID=>7244- [INFO {7244] [MODULE::ThreadControl] => Worker 7244 started

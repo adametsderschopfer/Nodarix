@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d06c60ab-e0e3-47a1-995b-288312a70a80" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/server/core/components/DTOChecker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/components/Logger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/components/TemplateEngine.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/components/ThreadControl.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/env/.development.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/env/.production.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/middlewares/HttpBasicAuthorization.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/services/ConfigLoader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/templates/footer.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/templates/header.ejs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1uXzdSh7pf8pVd0JV4nNrG3GuNF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.4" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.17.4" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\middlewares" />
+      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\core" />
+      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\services" />
+      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d06c60ab-e0e3-47a1-995b-288312a70a80" name="Default Changelist" comment="" />
+      <created>1624826813032</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624826813032</updated>
+      <workItem from="1624826815322" duration="2398000" />
+      <workItem from="1624910447904" duration="23633000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="731" y="381" key="#Notifications" timestamp="1624827481967">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="731" y="381" key="#Notifications/0.30.1920.1050@0.30.1920.1050" timestamp="1624827481967" />
+    <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1624913238381">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1624913238381" />
+    <state x="616" y="258" width="672" height="677" key="run.anything.popup" timestamp="1625525874879">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="616" y="258" width="672" height="677" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625525874879" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1625522772935">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625522772935" />
+  </component>
+</project>
