@@ -62,11 +62,11 @@ class DTOChecker {
     }
 
     validate(opt = {}) {
-        const {                             
+        const {
             ignoreNotExistsFields = false
         } = opt;
 
-        const errorProps = { errorMsg: '' };
+        const errorProps = {errorMsg: ''};
         let schema = {};
 
         if (this.DTO instanceof Function) {
@@ -81,23 +81,28 @@ class DTOChecker {
 
         this.valid = true;
 
-        function checkImportantPropExists(_valObjKey) {
+        function checkSchema(_valObjKey, __schema) {
             if (!_valObjKey) {
                 errorProps.errorMsg = `_valObjKey is undefined.`;
                 return false;
             }
 
-            if (!schema[_valObjKey].hasOwnProperty('required')) {
+            if (!__schema[_valObjKey]) {
+                errorProps.errorMsg = `Key { ${_valObjKey} } is not declare in DTO.`;
+                return false;
+            }
+
+            if (!__schema[_valObjKey].hasOwnProperty('required')) {
                 errorProps.errorMsg = `Key { ${_valObjKey} } hasn't important property => [required], please add that prop.`;
                 return false;
             }
 
-            if (typeof schema[_valObjKey].required !== 'boolean') {
+            if (typeof __schema[_valObjKey].required !== 'boolean') {
                 errorProps.errorMsg = `Key { ${_valObjKey} } required should be a Boolean type.`;
                 return false;
             }
 
-            if (!schema[_valObjKey].hasOwnProperty('type')) {
+            if (!__schema[_valObjKey].hasOwnProperty('type')) {
                 errorProps.errorMsg = `Key { ${_valObjKey} } hasn't important property => [type], please add that prop.`;
                 return false;
             }
@@ -105,22 +110,53 @@ class DTOChecker {
             return true;
         }
 
-        for (const valObjKey in this.value) {
-            if (!schema.hasOwnProperty(valObjKey)) {
-                if (!ignoreNotExistsFields) {
-                    errorProps.errorMsg = `Key { ${valObjKey} } of validate object does not exists in validation schema`;
-                    this.valid = false;
+        const checkFieldsIsExists = () => {
+            let flag = true;
+            let checkSchemaError = false;
+            let key = '';
 
-                    break;
+            function check(object, schema) {
+                for (let property in object) {
+                    if (object.hasOwnProperty(property)) {
+                        if (!checkSchema(property, schema)) {
+                            checkSchemaError = true;
+                            flag = false;
+                            key = property;
+                            break;
+                        }
+
+                        if (schema && !schema[property]) {
+                            flag = false;
+                            key = property;
+                            break;
+                        }
+
+                        if (typeof object[property] == 'object') {
+                            check(object[property], schema[property])
+                        }
+                    }
                 }
-            } else {
-                const importantPropsIsExists = checkImportantPropExists(valObjKey);
+            }
 
-                if (!importantPropsIsExists) {
-                    this.valid = false;
-                    break;
+            check.bind(this)(this.value, schema);
+
+            return {flag, key, checkSchemaError};
+        }
+
+        const checkFieldsExistsResult = checkFieldsIsExists();
+
+        if (!checkFieldsExistsResult.flag) {
+            if (!ignoreNotExistsFields) {
+                if (!checkFieldsExistsResult.checkSchemaError) {
+                    errorProps.errorMsg = `Key { ${checkFieldsExistsResult.key} } of validate object does not exists in validation schema`;
                 }
+                
+                this.valid = false;
+            }
+        }
 
+        if (this.valid) {
+            for (const valObjKey in this.value) {
                 const _value = this.value[valObjKey];
                 const _schemaItem = schema[valObjKey];
 
@@ -131,7 +167,7 @@ class DTOChecker {
                         let stackTypesOfArray = [];
 
                         __schemaItem__.type.forEach(t => {
-                            stackTypesOfArray = [...stackTypesOfArray, { type: t, valid: __valueType__ === t }];
+                            stackTypesOfArray = [...stackTypesOfArray, {type: t, valid: __valueType__ === t}];
                         });
 
                         const result = stackTypesOfArray.filter(v => v.valid);
@@ -191,7 +227,7 @@ class DTOChecker {
                                         errorProps.errorMsg = `The key { ${__valObjKey__} } is empty array, which is required!`;
                                         return false;
                                     }
-                                    
+
                                     break;
                                 }
                             }
@@ -203,19 +239,32 @@ class DTOChecker {
                     return true;
                 }
 
-                if (Object.keys(schema[valObjKey]).length <=2) {
+                if (Object.keys(schema[valObjKey]).length <= 2) {
                     if (!__recursivePropValidate(_value, _schemaItem, valObjKey)) {
                         this.valid = false;
                         break;
                     }
                 } else {
-                    function recursiveForEachValidate(__val__, __schemaItem__, __valObjKey__) {
-                        for (const depthsKey in _value) {
-                            
+                    const recursiveForEachValidate = (__val__, __schemaItem__, __valObjKey__, root) => {
+                        if (root) {
+                            if (!__recursivePropValidate(_value, _schemaItem, valObjKey)) {
+                                this.valid = false;
+                            }
+                        }
+
+                        for (const depthsKey in __val__) {
+                            if (!__recursivePropValidate(__val__[depthsKey], __schemaItem__[depthsKey], depthsKey)) {
+                                this.valid = false;
+                                break;
+                            }
+
+                            if (__schemaItem__[depthsKey] && Object.keys(__schemaItem__[depthsKey]).length > 2) {
+                                recursiveForEachValidate(__val__[depthsKey], __schemaItem__[depthsKey]);
+                            }
                         }
                     }
 
-                    recursiveForEachValidate(_value, _schemaItem, valObjKey);
+                    recursiveForEachValidate(_value, _schemaItem, valObjKey, true);
                 }
             }
         }
@@ -233,7 +282,7 @@ class DTOChecker {
     }
 
     static Exception(string) {
-        return { message: `[DTOChecker]: ${string}\t` }
+        return {message: `[DTOChecker]: ${string}\t`}
     }
 }
 

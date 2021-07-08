@@ -7,23 +7,20 @@
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d06c60ab-e0e3-47a1-995b-288312a70a80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/core/components/DTOChecker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/components/Logger.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/components/TemplateEngine.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/components/ThreadControl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/env/.development.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/env/.production.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/core/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/middlewares/HttpBasicAuthorization.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/services/ConfigLoader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/templates/footer.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/templates/header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.logs/2021-7-7.log" beforeDir="false" afterPath="$PROJECT_DIR$/.logs/2021-7-7.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/core/components/DTOChecker.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/components/DTOChecker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +46,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\middlewares" />
       <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\core" />
+      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\middlewares" />
       <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\services" />
       <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server" />
     </key>
@@ -64,8 +61,16 @@
       <option name="presentableId" value="Default" />
       <updated>1624826813032</updated>
       <workItem from="1624826815322" duration="2398000" />
-      <workItem from="1624910447904" duration="23633000" />
+      <workItem from="1624910447904" duration="31259000" />
     </task>
+    <task id="LOCAL-00001" summary="chore: add some firstly version core files, add templateHTML">
+      <created>1625609354751</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625609354751</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -76,14 +81,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: add some firstly version core files, add templateHTML" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: add some firstly version core files, add templateHTML" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="586" y="233" key="#Inspections" timestamp="1625780749196">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="586" y="233" key="#Inspections/0.30.1920.1050@0.30.1920.1050" timestamp="1625780749196" />
     <state x="731" y="381" key="#Notifications" timestamp="1624827481967">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -92,13 +117,17 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1624913238381" />
+    <state x="552" y="288" key="Vcs.Push.Dialog.v2" timestamp="1625609364677">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="552" y="288" key="Vcs.Push.Dialog.v2/0.30.1920.1050@0.30.1920.1050" timestamp="1625609364677" />
     <state x="616" y="258" width="672" height="677" key="run.anything.popup" timestamp="1625525874879">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="616" y="258" width="672" height="677" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625525874879" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1625522772935">
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1625782360128">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625522772935" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625782360128" />
   </component>
 </project>

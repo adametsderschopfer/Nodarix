@@ -8,3 +8,5 @@
 [2021-7-7 0:6:10] -PID=>7780- [INFO {7780] [MODULE::ThreadControl] => Worker 7780 started
 [2021-7-7 0:6:10] -PID=>12264- [INFO {12264] [MODULE::__CONFIG] => was initialize
 [2021-7-7 0:6:10] -PID=>12264- [INFO {12264] [MODULE::ThreadControl] => Worker 12264 started
+[2021-7-7 0:6:10] -PID=>12004- [INFO {12004] [MODULE::ThreadControl] => worker is dead true
+[2021-7-7 0:6:10] -PID=>12004- [INFO {12004] [MODULE::ThreadControl] => worker is dead true
