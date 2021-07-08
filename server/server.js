@@ -9,42 +9,6 @@ function bootstrap() {
         //
         // }).listen(__CONFIG.PORT)
 
-                         
-        class userEntityDTO {
-            firstname = {required: true, type: String}
-            lastname = {required: false, type: String}
-            birthYear = {required: true, type: Number}
-            birthDay = {type: [Number, String], required: true}
-            someDepthFields = {
-                required: true,
-                type: Object,
-
-                someDepthFields: {
-                    type: Object,
-                    someDepthField: {type: [Number, String]},
-                    moreDepthField: {
-                        type: Object,
-                        required: true,
-                        key: {
-                            type: Boolean,
-                            required: true
-                        }
-                    }
-                }
-            }
-        }
-
-        const userEntity = ({
-            firstname: '234',
-            lastname: 'Doe',
-            birthYear: 1999,
-            birthDay: '12',
-            someDepthFields: {someDepthField: 123123, moreDepthField: {key: true}}
-        });
-
-        const userDTO = new DTOChecker(userEntity, userEntityDTO);
-        console.log(userDTO.validate())
-
         /**
          *
          * HTTP module

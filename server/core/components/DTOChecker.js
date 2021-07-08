@@ -58,7 +58,7 @@ class DTOChecker {
         }
 
         this.value = value;
-        this.DTO = DTO
+        this.DTO = DTO;
     }
 
     validate(opt = {}) {
@@ -76,7 +76,7 @@ class DTOChecker {
         }
 
         if (!schema) {
-            throw DTOChecker.Exception('incorrectly schema constructor')
+            throw DTOChecker.Exception('incorrectly schema constructor');
         }
 
         this.valid = true;
@@ -132,7 +132,7 @@ class DTOChecker {
                         }
 
                         if (typeof object[property] == 'object') {
-                            check(object[property], schema[property])
+                            check(object[property], schema[property]);
                         }
                     }
                 }
@@ -180,7 +180,7 @@ class DTOChecker {
                     } else {
                         if (__valueType__ !== __schemaItem__.type) {
                             errorProps.errorMsg = `The value { ${__val__} } has nothing to do with the type { ${__schemaItem__.type} }`;
-                            return false
+                            return false;
                         }
                     }
 
@@ -282,7 +282,7 @@ class DTOChecker {
     }
 
     static Exception(string) {
-        return {message: `[DTOChecker]: ${string}\t`}
+        return ({message: `[DTOChecker]: ${string}\t`});
     }
 }
 
