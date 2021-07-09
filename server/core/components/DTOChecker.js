@@ -1,4 +1,6 @@
-/**
+/*
+ * Created by: Adamets Vladislav
+ * Version: 0.1.3
  *
  * Example
  *
@@ -35,6 +37,10 @@
  * const userDTO = new DTOChecker(userEntity, userEntityDTO);
  * */
 
+/**
+ * @namespace Core
+ * @class DTOChecker
+ * */
 class DTOChecker {
     value = undefined;
     DTO = undefined;
