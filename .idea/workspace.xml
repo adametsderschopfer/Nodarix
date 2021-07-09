@@ -6,6 +6,15 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
     <select>
       <path>
@@ -17,10 +26,123 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d06c60ab-e0e3-47a1-995b-288312a70a80" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/server/Events.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/Helper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/Router.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/HTTPServer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/core/RouterFactory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.logs/2021-7-7.log" beforeDir="false" afterPath="$PROJECT_DIR$/.logs/2021-7-7.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/core/ConfigLoader.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/ConfigLoader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/core/components/DTOChecker.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/components/DTOChecker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/core/components/TemplateEngine.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/components/TemplateEngine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/core/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/core/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/HttpBasicAuthorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/Services/HttpBasicAuthorization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/.idea/template_html.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/category.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/page-about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/page-contact.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/readme.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/single-audio.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/single-gallery.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/single-standard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/single-video.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/css/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/css/vendor.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/avatars/user-01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/avatars/user-02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/avatars/user-03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/avatars/user-04.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/avatars/user-05.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-arrow-left.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-arrow-right.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-arrow-up.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-audio.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-link.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-mail.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-quote.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/icon-video.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-behance.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-dribbble.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-email.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-facebook.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-instagram.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-pinterest.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-rss.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/icons/social/icon-twitter.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/sample-image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/about/about-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/about/about-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/about/about-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/contact/contact-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/contact/contact-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/contact/contact-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/beetle-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/beetle-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/cookies-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/cookies-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/dew-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/dew-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/gallery/slide-1-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/gallery/slide-1-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/gallery/slide-2-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/gallery/slide-2-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/gallery/slide-3-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/gallery/slide-3-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/guitarist-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/guitarist-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/jump-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/jump-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/lamp-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/lamp-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/real-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/real-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/rucksack-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/rucksack-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/tulips-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/tulips-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/walk-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/walk-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/woodcraft-1200.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/masonry/woodcraft-600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-01-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-01-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-01-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-02-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-02-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-02-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-03-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-03-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/gallery/single-gallery-03-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/standard/standard-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/standard/standard-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/thumbs/single/standard/standard-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/wheel-1000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/wheel-2000.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/images/wheel-500.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/js/jquery-3.2.1.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/js/modernizr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/js/plugins.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/android-chrome-192x192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/android-chrome-512x512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/apple-touch-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/favicon-16x16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/favicon-32x32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/static-html/seo/site.webmanifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template_html/styles.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +168,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\services" />
       <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\core" />
       <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\middlewares" />
-      <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server\services" />
       <recent name="C:\Users\user\Desktop\Projects\new\typerite-blog\server" />
     </key>
   </component>
@@ -61,7 +183,9 @@
       <option name="presentableId" value="Default" />
       <updated>1624826813032</updated>
       <workItem from="1624826815322" duration="2398000" />
-      <workItem from="1624910447904" duration="31259000" />
+      <workItem from="1624910447904" duration="34923000" />
+      <workItem from="1625863499165" duration="5786000" />
+      <workItem from="1625872080056" duration="1744000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add some firstly version core files, add templateHTML">
       <created>1625609354751</created>
@@ -70,7 +194,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625609354751</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feet: add new update for DTOChecker">
+      <created>1625783260558</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625783260558</updated>
+    </task>
+    <task id="LOCAL-00003" summary="chore: remove test">
+      <created>1625783781506</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1625783781506</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,9 +240,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: add some firstly version core files, add templateHTML" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: add some firstly version core files, add templateHTML" />
+    <MESSAGE value="feet: add new update for DTOChecker" />
+    <MESSAGE value="chore: remove test" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: remove test" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="213" key="#Deployment" timestamp="1625865898060">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="552" y="213" key="#Deployment/0.30.1920.1050@0.30.1920.1050" timestamp="1625865898060" />
     <state x="586" y="233" key="#Inspections" timestamp="1625780749196">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -113,21 +257,21 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="731" y="381" key="#Notifications/0.30.1920.1050@0.30.1920.1050" timestamp="1624827481967" />
-    <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1624913238381">
+    <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1625860429795">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1624913238381" />
-    <state x="552" y="288" key="Vcs.Push.Dialog.v2" timestamp="1625609364677">
+    <state x="740" y="359" key="#com.intellij.fileTypes.FileTypeChooser/0.30.1920.1050@0.30.1920.1050" timestamp="1625860429795" />
+    <state x="552" y="288" key="Vcs.Push.Dialog.v2" timestamp="1625858566819">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="552" y="288" key="Vcs.Push.Dialog.v2/0.30.1920.1050@0.30.1920.1050" timestamp="1625609364677" />
+    <state x="552" y="288" key="Vcs.Push.Dialog.v2/0.30.1920.1050@0.30.1920.1050" timestamp="1625858566819" />
     <state x="616" y="258" width="672" height="677" key="run.anything.popup" timestamp="1625525874879">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="616" y="258" width="672" height="677" key="run.anything.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625525874879" />
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1625782360128">
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1625784285512">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625782360128" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/0.30.1920.1050@0.30.1920.1050" timestamp="1625784285512" />
   </component>
 </project>

@@ -6,7 +6,7 @@ class TemplateEngine {
     
     constructor({engine} = { engine: undefined }) {
         this.#engine = engine;
-        this.templatesPath = path.join(__CONFIG.root + '/templates/');
+        this.templatesPath = path.join(__CONFIG.root + '/Templates/');
     }
 
     changeLoadStackState(data = {}) {

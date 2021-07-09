@@ -1,1 +1,2 @@
-require('./server/server')();
+require('./server/core/core');
+require('./server/bootstrap')();

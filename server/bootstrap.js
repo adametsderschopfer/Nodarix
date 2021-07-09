@@ -1,14 +1,12 @@
-const core = require('./core/core');
 
 const ThreadControl = require('./core/components/ThreadControl');
-const DTOChecker = require('./core/components/DTOChecker');
+const CDTOChecker = require('./core/components/DTOChecker');
 
-function bootstrap() {
-    ThreadControl.clusterize(() => {
+class Bootstrap {
+    static init() {
         // require('http').createServer((req, res) => {
         //
         // }).listen(__CONFIG.PORT)
-
         /**
          *
          * HTTP module
@@ -22,9 +20,13 @@ function bootstrap() {
          * NDO (NODE.js Data Object) module
          *
          * */
-    });
 
-    // console.log(new (require('./core/components/TemplateEngine'))({ engine: require('ejs')}))
+        ThreadControl.clusterize(() => {
+
+        });
+    }
 }
 
-module.exports = bootstrap;
+// console.log(new (require('./core/components/TemplateEngine'))({ engine: require('ejs')}))
+
+module.exports = Bootstrap.init;

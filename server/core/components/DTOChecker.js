@@ -66,7 +66,7 @@ class DTOChecker {
             ignoreNotExistsFields = false
         } = opt;
 
-        const errorProps = {errorMsg: ''};
+        let errorProps = {};
         let schema = {};
 
         if (this.DTO instanceof Function) {
@@ -76,35 +76,37 @@ class DTOChecker {
         }
 
         if (!schema) {
-            throw DTOChecker.Exception('incorrectly schema constructor');
+            return {valid: false, ...DTOChecker.Exception('incorrectly schema constructor')}
         }
 
         this.valid = true;
 
         function checkSchema(_valObjKey, __schema) {
-            if (!_valObjKey) {
-                errorProps.errorMsg = `_valObjKey is undefined.`;
-                return false;
-            }
+            if (!ignoreNotExistsFields) {
+                if (!_valObjKey) {
+                    errorProps = DTOChecker.Exception(`_valObjKey is undefined.`);
+                    return false;
+                }
 
-            if (!__schema[_valObjKey]) {
-                errorProps.errorMsg = `Key { ${_valObjKey} } is not declare in DTO.`;
-                return false;
-            }
+                if (!__schema[_valObjKey]) {
+                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } is not declare in DTO.`);
+                    return false;
+                }
 
-            if (!__schema[_valObjKey].hasOwnProperty('required')) {
-                errorProps.errorMsg = `Key { ${_valObjKey} } hasn't important property => [required], please add that prop.`;
-                return false;
-            }
+                if (!__schema[_valObjKey].hasOwnProperty('required')) {
+                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } hasn't important property => [required], please add that prop.`);
+                    return false;
+                }
 
-            if (typeof __schema[_valObjKey].required !== 'boolean') {
-                errorProps.errorMsg = `Key { ${_valObjKey} } required should be a Boolean type.`;
-                return false;
-            }
+                if (typeof __schema[_valObjKey].required !== 'boolean') {
+                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } required should be a Boolean type.`);
+                    return false;
+                }
 
-            if (!__schema[_valObjKey].hasOwnProperty('type')) {
-                errorProps.errorMsg = `Key { ${_valObjKey} } hasn't important property => [type], please add that prop.`;
-                return false;
+                if (!__schema[_valObjKey].hasOwnProperty('type')) {
+                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } hasn't important property => [type], please add that prop.`);
+                    return false;
+                }
             }
 
             return true;
@@ -148,15 +150,19 @@ class DTOChecker {
         if (!checkFieldsExistsResult.flag) {
             if (!ignoreNotExistsFields) {
                 if (!checkFieldsExistsResult.checkSchemaError) {
-                    errorProps.errorMsg = `Key { ${checkFieldsExistsResult.key} } of validate object does not exists in validation schema`;
+                    errorProps = DTOChecker.Exception(`Key { ${checkFieldsExistsResult.key} } of validate object does not exists in validation schema`);
                 }
-                
+
                 this.valid = false;
             }
         }
 
         if (this.valid) {
             for (const valObjKey in this.value) {
+                if (!schema[valObjKey]) {
+                    continue;
+                }
+
                 const _value = this.value[valObjKey];
                 const _schemaItem = schema[valObjKey];
 
@@ -172,14 +178,14 @@ class DTOChecker {
 
                         const result = stackTypesOfArray.filter(v => v.valid);
                         if (!result.length) {
-                            errorProps.errorMsg = `The value { ${__val__} } has nothing to do with the types of array { ${__schemaItem__.type} }`;
+                            errorProps = DTOChecker.Exception(`The value { ${__val__} } has nothing to do with the types of array { ${__schemaItem__.type} }`);
                             return false;
                         }
                     } else if (__schemaItem__.type === 'any') {
                         return true;
                     } else {
                         if (__valueType__ !== __schemaItem__.type) {
-                            errorProps.errorMsg = `The value { ${__val__} } has nothing to do with the type { ${__schemaItem__.type} }`;
+                            errorProps = DTOChecker.Exception(`The value { ${__val__} } has nothing to do with the type { ${__schemaItem__.type} }`);
                             return false;
                         }
                     }
@@ -190,50 +196,44 @@ class DTOChecker {
                 const __recursivePropValidate = (__val__, __schemaItem__, __valObjKey__) => {
                     const __valueType__ = Object.getPrototypeOf(__val__).constructor;
 
-                    const isValidType = typeChecker(__val__, __schemaItem__);
+                    if (!typeChecker(__val__, __schemaItem__)) {
+                        return false;
+                    }
 
-                    if (isValidType) {
-                        if (__schemaItem__.required) {
-                            switch (__valueType__) {
-                                case String: {
-                                    if (!__val__.length) {
-                                        errorProps.errorMsg = `The key { ${__valObjKey__} } is empty string, which is required!`;
-                                        return false;
-                                    }
-
-                                    break;
+                    if (__schemaItem__.required) {
+                        switch (__valueType__) {
+                            case String: {
+                                if (!__val__.length) {
+                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is empty string, which is required!`);
+                                    return false;
                                 }
+                                break;
+                            }
 
-                                case Number: {
-                                    if (isNaN(__val__)) {
-                                        errorProps.errorMsg = `The key { ${__valObjKey__} } is NaN, which is required!`;
-                                        return false;
-                                    }
-
-                                    break;
+                            case Number: {
+                                if (isNaN(__val__)) {
+                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is NaN, which is required!`);
+                                    return false;
                                 }
+                                break;
+                            }
 
-                                case Object: {
-                                    if (!Object.keys(__val__).length) {
-                                        errorProps.errorMsg = `The key { ${__valObjKey__} } is empty object, which is required!`;
-                                        return false;
-                                    }
-
-                                    break;
+                            case Object: {
+                                if (!Object.keys(__val__).length) {
+                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is empty object, which is required!`);
+                                    return false;
                                 }
+                                break;
+                            }
 
-                                case Array: {
-                                    if (!__val__.length) {
-                                        errorProps.errorMsg = `The key { ${__valObjKey__} } is empty array, which is required!`;
-                                        return false;
-                                    }
-
-                                    break;
+                            case Array: {
+                                if (!__val__.length) {
+                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is empty array, which is required!`);
+                                    return false;
                                 }
+                                break;
                             }
                         }
-                    } else {
-                        return false;
                     }
 
                     return true;
@@ -269,16 +269,10 @@ class DTOChecker {
             }
         }
 
-        if (this.valid) {
-            return {
-                valid: this.valid
-            }
-        } else {
-            return {
-                valid: false,
-                ...errorProps
-            }
-        }
+        return ({
+            valid: this.valid,
+            ...errorProps
+        });
     }
 
     static Exception(string) {

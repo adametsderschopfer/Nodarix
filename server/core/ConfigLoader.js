@@ -2,7 +2,7 @@ const {define} = require('./utils');
 
 class ConfigLoader {
     path = require('path');
-    dotenv = require('dotenv');
+    dotenv = require('../Libs/dotenv');
     root = process.cwd();
 
     constructor() {
