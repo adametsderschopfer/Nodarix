@@ -1,6 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 
+/*
+ * Created by: Adamets Vladislav
+ * Version: 2.0.0
+ * */
+
 class Log {
     constructor() {
         this.today = new Date();

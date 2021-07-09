@@ -1,5 +1,10 @@
 const path = require('path');
 
+/*
+ * Created by: Adamets Vladislav
+ * Version: 2.0.0
+ * */
+
 class TemplateEngine {
     #engine = undefined;
     #state = {};
