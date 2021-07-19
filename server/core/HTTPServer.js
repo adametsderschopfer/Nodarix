@@ -34,7 +34,6 @@ class HTTPServer {
 
     async #handle(req, res) {
         try {
-
             await Helper.executeAsyncOrNotFunction(this.beforeHandleStart.bind(this, req, res));
             await Helper.executeAsyncOrNotFunction(this.afterHandleStart.bind(this, req, res));
         } catch (e) {

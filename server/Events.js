@@ -6,10 +6,16 @@ class EventsEngine extends EventEmitter {
     }
 }
 
-const Events = new EventsEngine;
+class Events {
+    constructor() {
+        this.emitter = new EventsEngine;
+    }
 
-Events.addListener('SERVER:test', () => {
-    console.log('TEST STROKE EVENT')
-});
-                                   
-module.exports = Events;
+    subscribeOnEvents(serverInstance) {
+        this.emitter.addListener('SERVER:test', () => {
+            console.log('TEST STROKE EVENT')
+        });
+    }
+}
+
+module.exports = new Events();

@@ -1,2 +1,2 @@
 require('./server/core/core');
-require('./server/bootstrap')();
+require('./server/Bootstrap')();
