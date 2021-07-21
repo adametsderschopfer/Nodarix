@@ -4,7 +4,7 @@ class Route {
         this.response = response;
     }
 
-    init() {}
+    result() {}
 }
 
 module.exports = Route;

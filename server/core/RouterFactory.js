@@ -12,10 +12,10 @@ class RouterFactory {
 
         this.CALLBACK_PROP = Helper.wrapLikeNotRoute("callbacks");
         this.PARAM_PROP = Helper.wrapLikeNotRoute("param");
+        this.subdomain = params.subdomain || ""
+        this.SemanticURLs = params.SemanticURLs || {};
 
-        this.SemanticURL = null;
         this.path = params.path || this.pathModule.join(__CONFIG.root, "server", "Routing");
-        this.errorUrl = '404';
 
         this.uris = {
             GET: {},
@@ -30,15 +30,13 @@ class RouterFactory {
         };
     }
 
-    declare() {
+    declare() {}
+
+    errorHandler(req, res) {
+        res.showError();
     }
 
-    execute(req, res) {
-        try {
-            this.SemanticURL = require(this.pathModule.join(this.path, "SemanticsURL.js"));
-        } catch (e) {
-        }
-
+    async execute(req, res) {
         req.params = {};
 
         const workingMethodStack = this.uris[req.method];
@@ -50,10 +48,16 @@ class RouterFactory {
             let lastIdx = branches.length - 1;
             let notFound = false;
             let callbacks = null;
+            let isFinish = null;
             let param = {};
 
+            if (!branches.length) {
+                notFound = true;
+                isFinish = true;
+            }
+
             for (let i = 0; i < branches.length; i++) {
-                const isFinish = lastIdx === i;
+                isFinish = lastIdx === i;
                 const branch = branches[i];
                 steps.push(branch);
 
@@ -69,7 +73,7 @@ class RouterFactory {
                             let __param__ = Helper.isParamKey(k);
                             if (__param__) {
                                 validKey = k;
-                                param = {...param, [__param__[this.PARAM_PROP]]: steps[j]};
+                                param = {...param, [__param__[this.PARAM_PROP]]: steps[j].split("/").join("")};
                             }
                         }
 
@@ -87,6 +91,7 @@ class RouterFactory {
                 }
 
                 if (notFound) {
+                    notFound = true;
                     break;
                 }
 
@@ -95,12 +100,13 @@ class RouterFactory {
                 }
             }
 
-            if (!callbacks || !callbacks[this.CALLBACK_PROP].length) {
+            if (!callbacks || !callbacks.hasOwnProperty(this.CALLBACK_PROP) || !callbacks[this.CALLBACK_PROP]?.length) {
                 notFound = true;
             }
 
-            if (notFound) {
-                res.showError(this.errorUrl || '404');
+            if (isFinish && notFound) {
+                res.statusCode = 404;
+                this.errorHandler(req, res);
                 return;
             }
 
@@ -109,12 +115,20 @@ class RouterFactory {
             }
 
             for (const callback of callbacks[this.CALLBACK_PROP]) {
-                /*TODO: CHECK ASYNC FUNCTION OF (use helper method)*/
-                callback(req, res) // TODO: CHECK IF IS CLASS
+                const cb = Helper.isES6Class(callback) ?
+                    new callback(req, res).result :
+                    Helper.isFunction(callback) ? callback.bind(this, req, res) : undefined;
+
+                if (!cb) {
+                    throw new TypeError("Callback is not a Function or Class");
+                }
+
+                await Helper.executeAsyncOrNotFunction(cb);
             }
         } else {
             console.warn("[RouterFactory]: nothing routes exists in " + req.method + " method");
-            res.showError(this.errorUrl || '404');
+            res.statusCode = 503;
+            this.errorHandler(req, res);
         }
     }
 
@@ -131,7 +145,6 @@ class RouterFactory {
             const branches = Helper.parseUrlPathOfSlashesWithParams(url);
 
             let branchLines = {};
-
 
             const branchBuilding = (link, array) => {
                 if (!array.length) {
@@ -162,7 +175,6 @@ class RouterFactory {
                         }
                     }
                 }
-
                 return obj;
             }
 
@@ -172,9 +184,14 @@ class RouterFactory {
         }
     }
 
-    include(req, res) {
-        this.declare(req, res);
-        this.execute(req, res);
+    async include(req, res) {
+        try {
+            this.declare(req, res);
+            await this.execute(req, res);
+        } catch (e) {
+            res.statusCode = 503;
+            this.errorHandler(req, res);
+        }
     }
 }
 

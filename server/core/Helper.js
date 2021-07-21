@@ -16,7 +16,7 @@ class Helper {
                         if (result instanceof Promise) {
                             await result;
                             fulfilled();
-                        } else { 
+                        } else {
                             fulfilled()
                         }
                     }
@@ -33,12 +33,32 @@ class Helper {
         return `<${str}>`
     }
 
-    isES6Class(fn) {
+    static isES6Class(fn) {
         return /^\s*class/.test(fn.toString());
     }
 
-    writeFileLog(str) {
+    static isFunction(fn) {
+        return fn && (fn instanceof Function || typeof fn === "function");
+    }
 
+    static writeFileLog(str) {
+
+    }
+
+    static getQueryParams(UELQS) {
+        const query = {};
+
+        if (!UELQS) {
+            throw new TypeError('UELQS is undefinde')
+        }
+
+        if (UELQS) {
+            for (const [key, value] of UELQS) {
+                query[key] = value;
+            }
+        }
+
+        return query;
     }
 
     static isObject(item) {
@@ -52,10 +72,10 @@ class Helper {
         if (Helper.isObject(target) && Helper.isObject(source)) {
             for (const key in source) {
                 if (Helper.isObject(source[key])) {
-                    if (!target[key]) Object.assign(target, { [key]: {} });
+                    if (!target[key]) Object.assign(target, {[key]: {}});
                     Helper.mergeDeep(target[key], source[key]);
                 } else {
-                    Object.assign(target, { [key]: source[key] });
+                    Object.assign(target, {[key]: source[key]});
                 }
             }
         }
@@ -65,21 +85,25 @@ class Helper {
 
     /** str => string like: /:id */
     static isParamKey(str) {
-       const pattern = /\/:/;
+        const pattern = /\/:/;
 
-       if (str.match(pattern) !== null) {
-           return {
-               "<param>": str.replace(pattern, ''),
-           }
-       }
+        if (str.match(pattern) !== null) {
+            return {
+                "<param>": str.replace(pattern, ''),
+            }
+        }
 
-       return false;
+        return false;
     }
 
     static parseUrlPathOfSlashesWithParams(_str) {
         let pathResult = [];
 
         function localProcessing(str) {
+            if (str === "/") {
+                return pathResult.push(str)
+            }
+
             const regex = /^\/[a-zA-Z0-9_:]+/;
             const res = str.match(regex);
 
@@ -100,16 +124,26 @@ class Helper {
         }
 
         switch (method.toUpperCase()) {
-            case "GET": return true;
-            case "POST": return true;
-            case "PUT": return true;
-            case "DELETE": return true;
-            case "HEAD": return true;
-            case "CONNECT": return true;
-            case "OPTIONS": return true;
-            case "TRACE": return true;
-            case "PATCH": return true;
-            default: return false;
+            case "GET":
+                return true;
+            case "POST":
+                return true;
+            case "PUT":
+                return true;
+            case "DELETE":
+                return true;
+            case "HEAD":
+                return true;
+            case "CONNECT":
+                return true;
+            case "OPTIONS":
+                return true;
+            case "TRACE":
+                return true;
+            case "PATCH":
+                return true;
+            default:
+                return false;
         }
     }
 }

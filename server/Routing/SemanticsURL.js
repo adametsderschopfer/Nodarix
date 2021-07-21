@@ -1,4 +1,4 @@
 module.exports = {
-    'asd': 'asd'
+    'novosty': 'news'
 }
 

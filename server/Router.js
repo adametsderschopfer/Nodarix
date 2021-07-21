@@ -5,33 +5,53 @@ class Router extends RouterFactory {
         super(params);
     }
 
+    async errorHandler(req, res) {
+        res.templates.changeLoadStackState({ errorCode: res.statusCode })
+        res.end(await res.templates.render("/404.ejs"))
+    }
+
+    declare() {
+        this.register("GET", "/", (req, res) => {
+            res.end(`
+                <h1>News</h1>
+                <a href="/news">news</a>
+            `);
+
+            /*req.params => /news/:detail -> detail as key*/
+            /*req.query => query string as object*/
+        })
+        this.register("GET", "/news", (req, res) => {
+            res.end(`
+                <h1>News</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
+            `);
+
+            /*req.params => /news/:detail -> detail as key*/
+            /*req.query => query string as object*/
+        })  
+    }
+}
+
+class RouterApi extends RouterFactory {
+    constructor(params) {
+        super(params);
+    }
+
     declare() {
         this.register("GET", "/news", (req, res) => {
-
-            res.end('news')
-        } )
-        this.register("GET", "/news/get", (req, res) => {
-            console.log(3)
-            res.end('get 1')
-        })
-        this.register("GET", "/news/:detail", (req, res) => {
-            res.end(req.params.detail)
-        })                      
-                             
-
-        this.register("GET", "/news/get/:detail", (req, res) => {
-            console.log(3)
-        })
-
-
-        this.register("GET", "/news/get/:detail/:page", (req, res) => {
-            console.log(req.params)
-            res.end(JSON.stringify(req.params, null, 2))
-
+            res.end(JSON.stringify({title: "lorem ipsum"}, null, 2))
         })
     }
 }
 
-module.exports = new Router({
-    path: require("path").join(__CONFIG.root, "server", "Routing")
-});
+module.exports = [
+    new RouterApi({
+        subdomain: "api"
+    }),
+    new Router({
+        SemanticURLs: require('./Routing/SemanticsURL')
+    })
+];

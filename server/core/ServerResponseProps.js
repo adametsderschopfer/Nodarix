@@ -3,9 +3,9 @@ class ServerResponseProps {
         this.res = res;
     }
 
-    showError(code = 200) {
-        // set status code
-        // this.res.end('error!')
+    showError(url) {
+        this.statusCode = 404;
+        this.end("404 NOT FOUND");
     }
 
     redirect(url, code = 200) {
