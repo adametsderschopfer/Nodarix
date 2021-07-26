@@ -1,10 +1,11 @@
-const Helper = require("./core/Helper");
-
 class Bootstrap {
     static init() {
         require('./core/components/ThreadControl').clusterize(() => {
             const ServerResponseProps = require('./core/ServerResponseProps');
             const RouterFactory = require("./core/RouterFactory");
+            const Helper = require("./core/Helper");
+            const StaticFiles = require("./core/components/StaticFiles");
+            const path = require("path");
 
             class HttpServer extends Core.HTTPServer {
                 static getEvents() {
@@ -13,10 +14,6 @@ class Bootstrap {
 
                 static getRouterModules() {
                     return require('./Router');
-                }
-
-                static getTemplateEngine() {
-                    return require('./core/components/TemplateEngine');
                 }
 
                 constructor() {
@@ -51,10 +48,17 @@ class Bootstrap {
                     const {searchParams} = new URL(url + req.url);
 
                     res = new ServerResponseProps(res).init();
-                    res.templates = HttpServer.getTemplateEngine();
                     req.query = Helper.getQueryParams(searchParams);
 
-                    //  call here static files
+                    if (/[http:\/\/|https:\/\/]static/.test(url) || req.url.replace('\/', "").split("\/")[0] === (__CONFIG.STATIC_DIR || "static")) {
+                        const staticWorker = new StaticFiles({
+                            req,
+                            res,
+                        });
+
+                        staticWorker.process();
+                        return;
+                    }
 
                     const routerModules = HttpServer.getRouterModules();
 

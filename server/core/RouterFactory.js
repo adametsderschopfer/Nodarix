@@ -1,5 +1,10 @@
 const Helper = require("./Helper");
 
+/*
+ * Created by: Adamets Vladislav
+ * Version: 1.0.0
+ */
+
 class RouterFactory {
     get pathModule() {
         return require("path");

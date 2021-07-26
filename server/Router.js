@@ -17,8 +17,6 @@ class Router extends RouterFactory {
                 <a href="/news">news</a>
             `);
 
-            /*req.params => /news/:detail -> detail as key*/
-            /*req.query => query string as object*/
         })
         this.register("GET", "/news", (req, res) => {
             res.end(`
