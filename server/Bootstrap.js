@@ -5,7 +5,7 @@ class Bootstrap {
             const RouterFactory = require("./core/RouterFactory");
             const Helper = require("./core/Helper");
             const StaticFiles = require("./core/components/StaticFiles");
-            const path = require("path");
+            const BodyParser = require("./core/components/BodyParser");
 
             class HttpServer extends Core.HTTPServer {
                 static getEvents() {
@@ -48,16 +48,17 @@ class Bootstrap {
                     const {searchParams} = new URL(url + req.url);
 
                     res = new ServerResponseProps(res).init();
-                    req.query = Helper.getQueryParams(searchParams);
+                    req.$_QUERY = Helper.getQueryParams(searchParams);
+                    req.$_BODY = {};
+                    req.$_FILES = [];
 
                     if (/[http:\/\/|https:\/\/]static/.test(url) || req.url.replace('\/', "").split("\/")[0] === (__CONFIG.STATIC_DIR || "static")) {
-                        const staticWorker = new StaticFiles({
-                            req,
-                            res,
-                        });
-
-                        staticWorker.process();
+                        new StaticFiles({req,res}).process();
                         return;
+                    }
+
+                    if (req.method !== 'GET') {
+                        await new BodyParser({req, res}).process();
                     }
 
                     const routerModules = HttpServer.getRouterModules();

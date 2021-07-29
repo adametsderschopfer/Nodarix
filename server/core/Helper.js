@@ -49,7 +49,7 @@ class Helper {
         const query = {};
 
         if (!UELQS) {
-            throw new TypeError('UELQS is undefinde')
+            throw new TypeError('UELQS is undefined')
         }
 
         if (UELQS) {

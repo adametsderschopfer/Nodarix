@@ -1,4 +1,5 @@
 const RouterFactory = require("./core/RouterFactory");
+const FileWriter = require("./core/components/FileWriter");
 
 class Router extends RouterFactory {
     constructor(params) {
@@ -18,14 +19,20 @@ class Router extends RouterFactory {
             `);
 
         })
+        this.register("POST", "/", (req, res) => {
+            FileWriter.saveFile({files: req.$_FILES, pathToSave: "users/images"}, );
+
+
+        })
         this.register("GET", "/news", (req, res) => {
-            res.end(`
-                <h1>News</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, odit!</p>
-            `);
+            res.writeHead(200, { 'content-type': 'text/html' });
+            res.end(
+                '<form action="/" enctype="multipart/form-data" method="post">'+
+                '<input type="text" name="title"><br>'+
+                '<input type="file" name="upload" multiple="multiple"><br>'+
+                '<input type="submit" value="Upload">'+
+                '</form>'
+            );
 
             /*req.params => /news/:detail -> detail as key*/
             /*req.query => query string as object*/
