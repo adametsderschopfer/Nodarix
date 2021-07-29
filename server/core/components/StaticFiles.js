@@ -5,7 +5,7 @@ class StaticFiles {
     constructor({ req, res}) {
         this.req = req;
         this.res = res;
-        this.staticFilePath = path.join(__CONFIG.root, this.req.url);
+        this.staticFilePath = path.join(__CONFIG.root, (/[http:\/\/|https:\/\/]static/.test("http://" + req.headers.host) ? "static" : ""), this.req.url);
     }
 
     process() {
@@ -21,7 +21,7 @@ class StaticFiles {
             });
 
             readStream.on('error', (err) => {
-                this.res.showError(503, JSON.stringify(err));
+                this.res.showError(404, JSON.stringify(err));
             });
         })
     }
