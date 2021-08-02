@@ -2,3 +2,5 @@
 /dist
 /.logs
 /.idea
+/static
+/server/config/env/.production.env
