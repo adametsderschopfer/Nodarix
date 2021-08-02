@@ -7,9 +7,7 @@ function define(key, value) {
         throw new SyntaxError('invalid value for define property: ['+ key +'] in global')
     }
 
-    Object.assign(global, {
-        [key]: value
-    });
+    global[key] = global[key] instanceof Object ? {...global[key], ...value} : value;
 }
 
 module.exports = {
