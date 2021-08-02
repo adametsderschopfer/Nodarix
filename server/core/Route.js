@@ -1,10 +1,29 @@
 class Route {
-    constructor(request, response) {
-        this.request = request;
-        this.response = response;
+    constructor({req, res}) {
+        this.request = req;
+        this.response = res;
+
+        this.#result();
+    }
+
+    render(args) {
+        const TemplateEngine = require("./components/TemplateEngine");
+        TemplateEngine.render(args)
+            .then((template) => {
+                this.response.status = 200;
+                this.response.end(template);
+            })
+            .catch(e => {
+                this.response.status = 404;
+                this.response.end(JSON.stringify(e, null, 2));
+            });
     }
 
     result() {}
+
+    #result() {
+        console.log(this?.result)
+    }
 }
 
 module.exports = Route;
