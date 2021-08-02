@@ -7,34 +7,34 @@
  * { type, required } <- is important fields
  *
  * class userEntityDTO {
- *     firstname = { required: true, type: String }
- *     lastname = { required: false, type: String }
- *     birthYear = { required: true, type: Number }
- *     birthDay = { type: [Number, String] }
- *     someDepthFields = {
- *      required: true,
- *      type: Object,
- *
- *      someDepthFields: {
+ *      firstname = { required: true, type: String }
+ *      lastname = { required: false, type: String }
+ *      birthYear = { required: true, type: Number }
+ *      birthDay = { type: [Number, String], required: true }
+ *      someDepthFields = {
+ *          required: true,
  *          type: Object,
- *          someDepthField: { type: [Number, String] },
- *          moreDepthField: {
+ *          someDepthFields: {
  *              type: Object,
  *              required: true,
- *              key: {
- *                  type: Boolean,
- *                  required: true
+ *              someDepthField: { type: [Number, String], required: true },
+ *              moreDepthField: {
+ *                  type: Object,
+ *                  required: true,
+ *                  key: {
+ *                      type: Boolean,
+ *                      required: true
+ *                  }
  *              }
  *          }
  *      }
- *     }
- * }
+ *  }
  *
- * const userEntity = (
- *  { firstname: 'John', lastname: 'Doe', birthYear: 1999, birthDay: '16', someDepthFields: { someDepthField: 123123, moreDepthField: { key: true } } }
- * );
- *
- * const userDTO = new DTOChecker(userEntity, userEntityDTO);
+ *  const userEntity = (
+ *  { firstname: 'John', lastname: 'Doe', birthYear: 1999, birthDay: '16', someDepthFields: { someDepthFields: { moreDepthField: { key: true } , someDepthField: 1 }, } }
+ *  );
+ *  
+ *  const userDTO = new Core.DTOChecker(userEntity, userEntityDTO);
  * */
 
 /**
