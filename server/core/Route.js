@@ -8,7 +8,7 @@ class Route {
 
     render(args) {
         const TemplateEngine = require("./components/TemplateEngine");
-        TemplateEngine.render(args)
+        TemplateEngine.render(args)        
             .then((template) => {
                 this.response.status = 200;
                 this.response.end(template);
@@ -22,7 +22,9 @@ class Route {
     result() {}
 
     #result() {
-        console.log(this?.result)
+        /*
+        * TODO: DO SOME INSIDE METHODS HERE
+        * */
     }
 }
 
