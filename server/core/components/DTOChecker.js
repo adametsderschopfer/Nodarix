@@ -1,4 +1,4 @@
-/*
+/**
  * Created by: Adamets Vladislav
  * Version: 0.1.3
  *
