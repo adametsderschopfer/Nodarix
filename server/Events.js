@@ -12,8 +12,8 @@ class Events {
     }
 
     subscribeOnEvents(serverInstance) {
-        this.emitter.addListener('SERVER:test', () => {
-            console.log('TEST STROKE EVENT')
+        this.emitter.addListener('WEBHOOK::Test', () => {
+            console.log('TEST EVENT')
         });
     }
 }
