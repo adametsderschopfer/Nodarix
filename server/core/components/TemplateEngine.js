@@ -18,7 +18,7 @@ class TemplateEngine {
         Object.assign(this.#state, data);
     }
 
-    async render(filename = '', data = {}, options, cb) {
+    render(filename = '', data = {}, options, cb) {
         if (!this.#engine) {
             throw new ReferenceError('Current template engine is undefined');
         }
