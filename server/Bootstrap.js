@@ -2,7 +2,6 @@ class Bootstrap {
     static init() {
         require('./core/components/ThreadControl').clusterize(() => {
             const ServerResponseProps = require('./core/ServerResponseProps');
-            const RouterFactory = require("./core/RouterFactory");
             const Helper = require("./core/Helper");
             const StaticFiles = require("./core/components/StaticFiles");
             const BodyParser = require("./core/components/BodyParser");
@@ -61,28 +60,7 @@ class Bootstrap {
                         await new BodyParser({req, res}).process();
                     }
 
-                    const routerModules = HttpServer.getRouterModules();
-
-                    if (routerModules instanceof Array && routerModules.length) {
-                        const foundRouterModule = routerModules.find(rm => {
-                            switch (true) {
-                                case /[http:\/\/|https:\/\/]api/.test(url) && rm.subdomain === "api": return rm;
-                                case /[http:\/\/|https:\/\/]/.test(url) && rm.subdomain === "": return rm;
-                                default: return false;
-                            }
-                        });
-
-                        if (!foundRouterModule) {
-                            res.end("<h1>404 NOT FOUND</h1>");
-                            return;
-                        }
-
-                        await foundRouterModule.include(req, res);
-                    } else if (routerModules instanceof RouterFactory) {
-                        routerModules.include(req, res);
-                    } else {
-                        res.end("<h1>503 ROUTER IS FAILED</h1>");
-                    }
+                    await HttpServer.getRouterModules().init({req, res, url});
                 }
 
                 static listenCallback() {
