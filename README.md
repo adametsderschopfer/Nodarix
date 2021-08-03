@@ -3,7 +3,34 @@ Disclaimer! This library was written based on the experience of the developer, I
 
 ## Documentation 
 
-### Core.DTOChecker
+### Logger
+
+##### Logger::info(string text)
+##### Logger::warn(string text)
+##### Logger::error(string text)
+Methods takes string for save in root path folder '.logs'
+
+##### Logger::custom(string filename, string text)
+Created custom file with your text in in root path folder '.logs'
+
+### CAgent
+##### CAgent::queueJob(function job)
+```js
+CAgent.queueJob(() => {
+     console.log('Async job')
+});
+```
+##### CAgent::schedule(string crontab, function schedule, [options])
+```js
+const Task = CAgent.schedule('* * * * *', () => {
+     console.log('CRON task')
+});
+
+// Task.start();
+// Task.stop();
+```
+
+### Core.DTOChecker(object schema, object value)
 ```js
 class userEntityDTO {
      firstname = { required: true, type: String }
@@ -34,22 +61,23 @@ class userEntityDTO {
  
  const userDTO = new Core.DTOChecker(userEntity, userEntityDTO);
  
- userDTO.validate() // result here { valid: true }
+ userDTO.validate(); // result here { valid: true }
  ```
 
 For use class Core.DTOChecker you need create class or Object with needed fields which you need check (see example above),
 and add object which you need validate, and afer all you need call .validate method whick return validate status.
 
-
 ### Core.FileWriter
-##### Core.FileWriter::saveFile
+##### Core.FileWriter::saveFile(object { files, pathToSave, salt? })
 ```js
-    Core.FileWriter.saveFile({ files: [], pathToSave: "", salt: Date.now() });
+Core.FileWriter.saveFile({ files: [], pathToSave: "", salt: Date.now() });
 ```
 =!> files - use request.$_FILES for getting coming files and save
+
 =!> pathToSave - path where save selected files
+
 => salt - non required field, adds some generated (or not) text in file name 
----
+
 ## license
 Copyright 2021 Adamets Validslav
 
