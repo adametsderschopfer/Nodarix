@@ -3,6 +3,35 @@ Disclaimer! This library was written based on the experience of the developer, I
 
 ## Documentation 
 
+### RouterList
+##### Core.RouterList::getRouterList()
+Getting all router declaration list
+
+##### Core.RouterList::addNewRouter({[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
+Add new router declaration
+[Caution] if routes is empty array or undefined or not contains at least one route declaration, Router declaration can not be created!
+
+##### Core.RouterList::removeRouter([string]routerID)
+Remove router by id
+
+##### Core.RouterList::getRouterByID([string]routerID)
+Getting router by router id
+
+##### Core.RouterList::editRouter([string]routerID, {[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
+Edit router declaration (do not forget about the warning about the routes field)
+
+##### Core.RouterList::generateRoute({[string]pathToRoute, [string]pathLink, [string]method})
+Method for create declaration object (addNewRoute already using this method, do not use this method for creating a new route declaration)
+
+##### Core.RouterList::addNewRoute([string]routerID, {[string]pathToRoute, [string]pathLink, [string]method})
+Create and add new route declaration by router id
+
+##### Core.RouterList::removeRoute(routerID, routeID)
+Remove specific route by route id and by router id
+
+##### Core.RouterList::editRoute(routerID, routeID, {[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
+Edit specific route by RouterID and RouteID
+
 ### Core.ConfigLoader
 ##### Core.ConfigLoader::getConfigOfEnv()
 Method for getting environment variables
@@ -15,22 +44,22 @@ this method will make changes to the already declared "__CONFIG"
 
 ### Logger
 
-##### Logger::info(string text)
-##### Logger::warn(string text)
-##### Logger::error(string text)
+##### Logger::info([string]text)
+##### Logger::warn([string]text)
+##### Logger::error([string]text)
 Methods takes string for save in root path folder '.logs'
 
-##### Logger::custom(string filename, string text)
+##### Logger::custom([string]filename, [string]text)
 Created custom file with your text in in root path folder '.logs'
 
 ### CAgent
-##### CAgent::queueJob(function job)
+##### CAgent::queueJob([function]job)
 ```js
 CAgent.queueJob(() => {
      console.log('Async job')
 });
 ```
-##### CAgent::schedule(string crontab, function schedule, [options])
+##### CAgent::schedule([string]crontab, [function]schedule, [options])
 ```js
 const Task = CAgent.schedule('* * * * *', () => {
      console.log('CRON task')
@@ -40,7 +69,7 @@ const Task = CAgent.schedule('* * * * *', () => {
 // Task.stop();
 ```
 
-### Core.DTOChecker(object schema, object value)
+### Core.DTOChecker([object]schema, [object]value)
 ```js
 class userEntityDTO {
      firstname = { required: true, type: String }
