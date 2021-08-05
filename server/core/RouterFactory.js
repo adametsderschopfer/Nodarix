@@ -156,7 +156,10 @@ class RouterFactory {
                 throw new Error("[RouterFactory]: callback 's for" + url + " must be declared");
             }
 
-            const branches = Core.Helper.parseUrlPathOfSlashesWithParams(url);
+            const startModifiedURL = url.startsWith('/') ? url : '/' + url;
+            const endModifiedURL =  startModifiedURL.endsWith('/') ?  startModifiedURL.replace(/[/]*$/, ''): startModifiedURL
+
+            const branches = Core.Helper.parseUrlPathOfSlashesWithParams(endModifiedURL);
 
             let branchLines = {};
 
@@ -166,7 +169,7 @@ class RouterFactory {
                 }
                 const dumpArr = array;
                 const key = dumpArr[0];
-                dumpArr.shift();
+                dumpArr.shift(); 
                 link[key] = {};
                 branchBuilding(link[key], dumpArr);
             }
