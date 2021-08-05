@@ -3,6 +3,16 @@ Disclaimer! This library was written based on the experience of the developer, I
 
 ## Documentation 
 
+### Core.ConfigLoader
+##### Core.ConfigLoader::getConfigOfEnv()
+Method for getting environment variables
+
+##### Core.ConfigLoader::reload()
+If the file with environment variables has been changed,
+this method will make changes to the already declared "__CONFIG"
+
+[Caution] this method cannot affect the methods that used the environment variables before the reboot; to use it, you must restart the node instance
+
 ### Logger
 
 ##### Logger::info(string text)
