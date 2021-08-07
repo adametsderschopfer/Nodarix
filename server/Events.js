@@ -18,4 +18,8 @@ class Events {
     }
 }
 
-module.exports = new Events();
+const instance = new Events();
+
+require('./core/utils').define('CEvents', Events);
+
+module.exports = instance;

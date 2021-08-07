@@ -3,19 +3,26 @@ Disclaimer! This library was written based on the experience of the developer, I
 
 ## Documentation 
 
-### RouterList
+### Core.RouterList
 ##### Core.RouterList::getRouterList()
 Getting all router declaration list
 
 ##### Core.RouterList::addNewRouter({[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
 Add new router declaration
+
 [Caution] if routes is empty array or undefined or not contains at least one route declaration, Router declaration can not be created!
 
 ##### Core.RouterList::removeRouter([string]routerID)
 Remove router by id
 
 ##### Core.RouterList::getRouterByID([string]routerID)
-Getting router by router id
+Getting router by router id   
+
+##### Core.RouterList::getRoutersBySubdomain([string]routerName)
+Getting routers by subdomain                               
+
+##### Core.RouterList::getRouterByName([string]routerName)
+Getting router by router name                                
 
 ##### Core.RouterList::editRouter([string]routerID, {[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
 Edit router declaration (do not forget about the warning about the routes field)
@@ -31,6 +38,10 @@ Remove specific route by route id and by router id
 
 ##### Core.RouterList::editRoute(routerID, routeID, {[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
 Edit specific route by RouterID and RouteID
+ 
+##### Core.RouterList::getRouteByID([string]routerID, [string]routeID)
+Getting route by router id and route id
+                     
 
 ### Core.ConfigLoader
 ##### Core.ConfigLoader::getConfigOfEnv()

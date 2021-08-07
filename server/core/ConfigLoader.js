@@ -1,37 +1,46 @@
 const {define} = require('./utils');
 
+let isFirst = true;
+
 class ConfigLoader {
     path = require('path');
     dotenv = require('../Libs/dotenv');
     root = process.cwd();
 
     constructor() {
-        define('__CONFIG', Object.create({}));
+        if (!isFirst) {
+            return;
+        }
 
+        define('__CONFIG', Object.create({}));
+        this.reload();
+        isFirst = false;
+        Logger.info('[MODULE::ConfigLoader] => was initialize');
+    }
+
+    reload() {
         try {
             const envs = this.getConfigOfEnv();
 
             Object.assign(global.__CONFIG, {
-                root: process.cwd(),
+                root: this.root,
+                isDev: process.env.NODE_ENV === 'development',
+                isProd: process.env.NODE_ENV === 'production',
                 ...envs
             });
-        } catch(e) {       
+        } catch (e) {
             Logger.info('[MODULE::ConfigLoader] => something went wrong =>' + JSON.stringify(e));
         }
 
-        Object.assign(global.__CONFIG, {
-            root: this.root,
-        });
-
-        Logger.info('[MODULE::__CONFIG] => was initialize');
+        if (!isFirst) {
+            Logger.info('[MODULE::ConfigLoader] => Environment updated');
+        }
     }
 
-
     getConfigOfEnv() {
-        const filenameEnv = `.${process.env.NODE_ENV}.env`;
-
-        return (this.dotenv.config({ path: this.path.join(this.root, '/server/config/env/', filenameEnv) }).parsed);
-    }                     
+        Logger.info('[MODULE::ConfigLoader] => Getting environment...');
+        return (this.dotenv.config({path: this.path.join(this.root, '/server/config/env/', `.${process.env.NODE_ENV}.env`)}).parsed);
+    }
 }
 
-module.exports = ConfigLoader;
+module.exports = new ConfigLoader();

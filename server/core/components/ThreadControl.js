@@ -3,7 +3,7 @@ class ThreadControl {
     static osLib = require('os');
 
     static clusterize(clusterizeFunction) {
-        const numCPUs = ThreadControl.osLib.cpus().length;
+        const numCPUs = __CONFIG.isDev ? 1 : ThreadControl.osLib.cpus().length;
 
         if (ThreadControl.clusterLib.isMaster) {
             Logger.info(`[MODULE::ThreadControl] => Master ${process.pid} is running`);
@@ -19,7 +19,7 @@ class ThreadControl {
             if (clusterizeFunction instanceof Function) {
                 clusterizeFunction();
             }
-            
+                                       
             Logger.info(`[MODULE::ThreadControl] => Worker ${process.pid} started`);
         }
     }

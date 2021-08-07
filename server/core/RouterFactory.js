@@ -167,11 +167,10 @@ class RouterFactory {
                 if (!array.length) {
                     return link;
                 }
-                const dumpArr = array;
-                const key = dumpArr[0];
-                dumpArr.shift(); 
+                const key = array[0];
+                array.shift();                   
                 link[key] = {};
-                branchBuilding(link[key], dumpArr);
+                branchBuilding(link[key], array);
             }
 
             branchBuilding(branchLines, Array.from(branches));

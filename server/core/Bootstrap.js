@@ -1,14 +1,20 @@
 class Bootstrap {
+    static beforeInit(cb = function (){}) {
+        return cb;
+    }
+
     static init() {
-        require('./core/components/ThreadControl').clusterize(() => {
-            const ServerResponseProps = require('./core/ServerResponseProps');
-            const Helper = require("./core/Helper");
-            const StaticFiles = require("./core/components/StaticFiles");
-            const BodyParser = require("./core/components/BodyParser");
+        require('./core');
+
+        require('./components/ThreadControl').clusterize(() => {
+            const ServerResponseProps = require('./ServerResponseProps');
+            const Helper = require("./Helper");
+            const StaticFiles = require("./components/StaticFiles");
+            const BodyParser = require("./components/BodyParser");
 
             class HttpServer extends Core.HTTPServer {
                 static getEvents() {
-                    return require('./Events');
+                    return require('../Events');
                 }
 
                 static getRouterModules() {
@@ -31,10 +37,7 @@ class Bootstrap {
                 }
 
                 async beforeInit() {
-                    return new Promise((res, rej) => {
-                        // connect to DB
-                        res();
-                    })
+                    await Helper.executeAsyncOrNotFunction(Bootstrap.beforeInit());
                 }
 
                 async afterInit(serverInstance) {
@@ -73,4 +76,4 @@ class Bootstrap {
     }
 }
 
-module.exports = Bootstrap.init;
+module.exports = Bootstrap;
