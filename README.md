@@ -1,4 +1,4 @@
-# Node.js HTTP MVC Blank
+# Nodarix
 Disclaimer! This library was written based on the experience of the developer, I do not promise stable work, but I guarantee you will like it!
 
 ## Documentation 
@@ -32,8 +32,6 @@ Getting all router declaration list
 
 ##### Core.RouterList::addNewRouter({[string]name, [string]subdomain?, [string]pathToErrorPage?, [array]routes})
 Add new router declaration
-
-[Caution] if routes is empty array or undefined or not contains at least one route declaration, Router declaration can not be created!
 
 ##### Core.RouterList::removeRouter([string]routerID)
 Remove router by id
