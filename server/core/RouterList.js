@@ -9,6 +9,9 @@ const Helper = require("./Helper");
  * @typedef {{ id?: string, pathToRoute: string, pathLink: string, method: string }} Route
  * */
 
+/**
+ * @class RouterList
+ * */
 class RouterList {
     constructor() {
         if (RouterList.init) {
@@ -331,6 +334,9 @@ class RouterList {
         }
     }
 
+    /**
+     * @param {Router} _router
+     * */
     #create(_router) {
         class Router extends Core.RouterFactory {
             constructor(params) {
