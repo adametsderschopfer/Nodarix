@@ -3,6 +3,29 @@ Disclaimer! This library was written based on the experience of the developer, I
 
 ## Documentation 
 
+### Core.Environment
+##### Core.Environment::getList()
+Getting all env vars
+
+##### Core.Environment::toEnvSyntax([object]obj)
+Method transforms your object in env template 
+
+##### Core.Environment::save([string]envObj)
+[CAUTION]: correctly use this method, param envObj is the result working function toEnvSyntax,
+if you include in the param incorrectly value, so you will remove all your env variables 
+
+##### Core.Environment::getConfigWithoutSystemVars()
+Method return environment without system vars
+
+##### Core.Environment::setEnv()
+Set new variable to env config or rewrite exists
+
+##### Core.Environment::getEnvByName()
+Getting env by name
+
+##### Core.Environment::removeEnvByName()
+Removing env by name
+
 ### Core.RouterList
 ##### Core.RouterList::getRouterList()
 Getting all router declaration list
