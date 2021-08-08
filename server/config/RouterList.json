@@ -1,6 +1,6 @@
 [
   {
-    "id": "js23JKhfiu&ASFhkJA",
+    "id": "js23JKhfiu&sASFhkJA",
     "name": "RouterApi",
     "subdomain": "api",
     "pathToErrorPage": "/errorPages/ApiException",
@@ -9,6 +9,20 @@
         "id": "JASFIUgv8f7GSAFas",
         "pathToRoute": "/api/news/GetAll",
         "pathLink": "/news",
+        "method": "GET"
+      }
+    ]
+  },
+  {
+    "id": "js23JKhfiu&ASFhkJA",
+    "name": "RouterApi",
+    "subdomain": "api",
+    "pathToErrorPage": "/errorPages/ApiException",
+    "routes": [
+      {
+        "id": "JASFIUgv8f7GSAFas",
+        "pathToRoute": "/api/news/GetAll",
+        "pathLink": "/news/a",
         "method": "GET"
       }
     ]

@@ -3,6 +3,8 @@
  * Version: 1.0.0
  */
 
+const Helper = require("./Helper");
+
 class RouterFactory {
     get pathModule() {
         return require("path");
@@ -17,6 +19,7 @@ class RouterFactory {
         this.PARAM_PROP = Core.Helper.wrapLikeNotRoute("param");
         this.subdomain = params.subdomain || ""
         this.SemanticURLs = params.SemanticURLs || {};
+        this.id = params.id;
 
         this.path = params.path || this.pathModule.join(__CONFIG.root, "server", "Routing");
 
@@ -33,7 +36,8 @@ class RouterFactory {
         };
     }
 
-    declare() {}
+    declare() {
+    }
 
     errorHandler(req, res) {
         res.showError();
@@ -156,10 +160,7 @@ class RouterFactory {
                 throw new Error("[RouterFactory]: callback 's for" + url + " must be declared");
             }
 
-            const startModifiedURL = url.startsWith('/') ? url : '/' + url;
-            const endModifiedURL =  startModifiedURL.endsWith('/') ?  startModifiedURL.replace(/[/]*$/, ''): startModifiedURL
-
-            const branches = Core.Helper.parseUrlPathOfSlashesWithParams(endModifiedURL);
+            const branches = Core.Helper.parseUrlPathOfSlashesWithParams(Helper.normalizeUrlSlashes(url));
 
             let branchLines = {};
 
@@ -168,7 +169,7 @@ class RouterFactory {
                     return link;
                 }
                 const key = array[0];
-                array.shift();                   
+                array.shift();
                 link[key] = {};
                 branchBuilding(link[key], array);
             }

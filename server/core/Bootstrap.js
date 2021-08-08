@@ -46,15 +46,15 @@ class Bootstrap {
                 }
 
                 async beforeHandleStart(req, res) {
-                    const url = "http://" + req.headers.host;
-                    const {searchParams} = new URL(url + req.url);
+                    const host = "http://" + req.headers.host;
+                    const {searchParams} = new URL(host + req.url);
 
                     res = new ServerResponseProps(res).init();
                     req.$_QUERY = Helper.getQueryParams(searchParams);
                     req.$_BODY = {};
                     req.$_FILES = [];
 
-                    if (/[http:\/\/|https:\/\/]static/.test(url) || req.url.replace('\/', "").split("\/")[0] === (__CONFIG.STATIC_DIR || "static")) {
+                    if (/[http:\/\/|https:\/\/]static/.test(host) || req.url.replace('\/', "").split("\/")[0] === (__CONFIG.STATIC_DIR || "static")) {
                         new StaticFiles({req,res}).process();
                         return;
                     }
@@ -63,7 +63,7 @@ class Bootstrap {
                         await new BodyParser({req, res}).process();
                     }
 
-                    await HttpServer.getRouterModules().init({req, res, url});
+                    await HttpServer.getRouterModules().init({req, res, host});
                 }
 
                 static listenCallback() {

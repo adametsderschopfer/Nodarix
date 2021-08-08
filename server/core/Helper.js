@@ -3,6 +3,11 @@ class Helper {
         return fn && fn.constructor.name === 'AsyncFunction';
     }
 
+    static normalizeUrlSlashes(url) {
+        const startModifiedURL = url.startsWith('/') ? url : '/' + url;
+        return startModifiedURL.endsWith('/') ?  startModifiedURL.replace(/[/]*$/, ''): startModifiedURL;
+    }
+
     static executeAsyncOrNotFunction(fn) {
         return new Promise(async (fulfilled, rej) => {
             try {

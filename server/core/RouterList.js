@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const uuid = require('uuid').v4;
 const RouterListException = require('./Exceptions/RouterListException');
+const Helper = require("./Helper");
 
 /**
  * @typedef {{ id?: string, name?: string, subdomain?: string, pathToErrorPage?: string, routes: Array }} Router
@@ -205,7 +206,8 @@ class RouterList {
      * */
     static generateRoute({pathToRoute, pathLink, method}) {
         if (pathToRoute && pathLink && method) {
-            return ({id: uuid(), method: method.trim(), pathLink: pathLink.trim(), pathToRoute: pathToRoute.trim()});
+
+            return ({id: uuid(), method: method.trim(), pathLink: Helper.normalizeUrlSlashes(pathLink).trim(), pathToRoute: pathToRoute.trim()});
         }
 
         throw new RouterListException('Invalid route: [' + "pathToRoute: " + pathToRoute + " pathLink: " + pathLink + " method: " + method + ']');
@@ -356,8 +358,9 @@ class RouterList {
         }
 
         this.routers.push(new Router({
-            subdomain: _router.subdomain.length && _router.subdomain || ""
-        }))
+            subdomain: _router.subdomain.length && _router.subdomain || "",
+            id: _router.id
+        }));
     }
 }
 
