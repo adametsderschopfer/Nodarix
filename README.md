@@ -151,6 +151,21 @@ Core.FileWriter.saveFile({ files: [], pathToSave: "", salt: Date.now() });
 
 => salt - non required field, adds some generated (or not) text in file name 
 
+## Examples
+#### Router Exception
+For creating error handler which you can specify in 'pathToErrorPage' in RouterList.json you need create code 
+following the example below
+```js
+ class ApiException {
+     static async include(req, res) {
+         res.templates.changeLoadStackState({errorCode: res.statusCode})
+         res.end(await res.templates.render("/404.ejs"))
+     }
+ }
+ 
+ module.exports = ApiException;
+```
+
 ## license
 Copyright 2021 Adamets Validslav
 

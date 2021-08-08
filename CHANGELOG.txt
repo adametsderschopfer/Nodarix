@@ -1,1 +1,2 @@
 08.08.2021: Add class [Environment] for working with the config env vars
+08.08.2021: rename project to 'Nodarix'
