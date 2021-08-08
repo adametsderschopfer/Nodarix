@@ -6,7 +6,7 @@ define('Core', Object.create({
     ConfigLoader: require('./ConfigLoader'),
     HTTPServer: require('./HTTPServer'),
     FileWriter: require('./components/FileWriter'),
-    Environment: require('./Environment'),
+    Environment: require('./Modules/Environment'),
     Helper: require('./Helper'),
     Route: require('./Route'),
     RouterList: require('./RouterList'),

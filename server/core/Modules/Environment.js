@@ -1,4 +1,4 @@
-const EnvironmentException = require("./Exceptions/EnvironmentException");
+const EnvironmentException = require("../Exceptions/EnvironmentException");
 const path = require("path");
 const fs = require("fs");
 
