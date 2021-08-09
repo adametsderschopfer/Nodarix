@@ -27,7 +27,7 @@ model User {
 
 #### get instance
 When you need using connect to db, use this code
-``js
+```js
 const dbModels = new CDatabase().getInstance();
 
 try  {
