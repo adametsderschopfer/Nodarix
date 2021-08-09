@@ -9,6 +9,7 @@ define('Core', Object.create({
     Environment: require('./Modules/Environment'),
     Helper: require('./Helper'),
     Route: require('./Route'),
+    Route: require('./Route'),
     RouterList: require('./RouterList'),
     RouterFactory: require('./RouterFactory'),
     DTOChecker: require('./components/DTOChecker')

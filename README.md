@@ -3,6 +3,47 @@ Disclaimer! This library was written based on the experience of the developer, I
 
 ## Documentation 
 
+### CDatabase
+1. add your db link to .env in the root 
+2. configure the scheme in the prisma/schema.prisma
+3. run the command
+```shell script 
+$ prisma generate
+```               
+4. Useing down...
+
+... for using db entities check, [prisma](https://www.prisma.io/docs/) docs
+
+prisma scheme example
+```prisma 
+model User {
+  id      Int      @default(autoincrement()) @id
+  email   String   @unique @db.VarChar(255)
+  name    String?  @db.VarChar(255)
+  posts   Post[]
+  profile Profile?
+}
+```
+
+#### get instance
+When you need using connect to db, use this code
+``js
+const dbModels = new CDatabase().getInstance();
+
+try  {
+    await dbModels.user.create({
+        data: {
+            email: "test@test.com",
+            name: "Nodarix"
+        }
+    })
+} catch(e) {
+    console.log(e)
+}
+
+// dbModels => models which you declare in your scheme
+```    
+
 ### Core.Environment
 ##### Core.Environment::getList()
 Getting all env vars

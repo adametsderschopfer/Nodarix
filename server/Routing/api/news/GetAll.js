@@ -4,11 +4,6 @@ class NewsGetAll extends Core.Route {
     }
 
     async result() {
-        const task = CAgent.schedule('* * * * *', () =>  {
-            console.log(new Date())
-            task.stop();
-        });
-
         this.render("/header.ejs");
     }
 }

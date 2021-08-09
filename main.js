@@ -1,7 +1,6 @@
 const bootstrap = require('./server/core/Bootstrap')
 
-bootstrap.beforeInit( function () {
-                 /*connect DB here*/
-})
-
+// bootstrap.beforeInit( function () {
+// })
+                                                   
 bootstrap.init();
