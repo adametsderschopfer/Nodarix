@@ -1,0 +1,22 @@
+[
+  {
+    "id": "js23JKhfiu&sASFhkJA",
+    "name": "Router Admin",
+    "subdomain": "admin",
+    "pathToErrorPage": "/errorPages/AdminException",
+    "routes": [
+      {
+        "id": "JASFIUgv8f7GSAFas",
+        "pathToRoute": "/admin/Auth/Auth",
+        "pathLink": "/auth",
+        "method": "GET"
+      },
+      {
+        "id": "JASFIUgv8f7GSAFas",
+        "pathToRoute": "/admin/Auth/Auth",
+        "pathLink": "/auth",
+        "method": "POST"
+      }
+    ]
+  }
+]

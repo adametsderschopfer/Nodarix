@@ -1,28 +1,39 @@
 const RouterListModule = require('./RouterList');
-const RouterList = new RouterListModule();
 const path = require('path');
-
-const routers = RouterList.getRouters();
 
 module.exports = {
     async init({host, req, res}) {
+        let listName = "RouterList";
+        let RouterList = null;
+        let routers = [];
+
         const failed = (e = { error: "Y" }) => {
             res.end(`
                 <h1>503 ROUTER IS FAILED</h1>
                 <br/>
-                <pre>${e}</pre> 
+                <pre>${JSON.stringify(e, null, 2)}</pre> 
             `);
         }
+
+        const subdomainTemp = t => new RegExp(String.raw`[http:\\/\\/|https:\\/\\/]${t}`);
+
+        if (subdomainTemp('admin').test(host)) {
+            listName = 'AdminRouterList';
+        }
+
+        RouterList = new RouterListModule(listName);
+        routers = RouterList.getRouters();
+
         if (routers instanceof Array && routers.length) {
-            const foundRouterModules = routers.filter(rm => new RegExp(String.raw`[http:\\/\\/|https:\\/\\/]${rm?.subdomain}`).test(host));
+            const foundRouterModules = routers.filter(rm => subdomainTemp(rm?.subdomain).test(host));
 
             if (!foundRouterModules.length) {
-                failed();
+                failed({ error: "router module is not found" });
                 return;
             }
 
             const subdomain = foundRouterModules[0].subdomain;
-            const routersBySubdomain = RouterListModule.getRoutersBySubdomain(subdomain);
+            const routersBySubdomain = RouterListModule.getRoutersBySubdomain(subdomain, listName);
             const _url = CHelper.normalizeUrlSlashes(req.url);
             let resultModuleID = null;
 
@@ -67,8 +78,9 @@ module.exports = {
                     break;
                 }
             }
-        } else {
-            failed();
+        }
+        else {
+            failed({ error: "routers is not found" });
         }
     }
 }

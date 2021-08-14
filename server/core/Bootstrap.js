@@ -51,6 +51,7 @@ class Bootstrap {
                     res = new ServerResponseProps(res).init();
                     req.$_QUERY = CHelper.getQueryParams(searchParams);
                     req.$_BODY = {};
+                    req.$_COOKIES = CHelper.parseCookies(req);
                     req.$_FILES = [];
 
                     if (/[http:\/\/|https:\/\/]static/.test(host) || req.url.replace('\/', "").split("\/")[0] === (CEnvironment.getVars().STATIC_DIR || "static")) {

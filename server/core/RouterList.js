@@ -12,7 +12,7 @@ const RouterListException = require('./Exceptions/RouterListException');
  * @class RouterList
  * */
 class RouterList {
-    constructor() {
+    constructor(listName) {
         if (RouterList.init) {
             return RouterList.instance;
         }
@@ -20,6 +20,7 @@ class RouterList {
         RouterList.init = true;
         RouterList.instance = this;
 
+        this.listName = listName;
         this.routers = [];
         this.routerList = [];
 
@@ -31,20 +32,20 @@ class RouterList {
      *
      * @return string
      * */
-    static get pathToRouterList() {
-        return path.join(CEnvironment.getVars().root, 'server/config', 'RouterList.json');
+    static pathToRouterList(t = 'RouterList') {
+        return path.join(CEnvironment.getVars().root, 'server/config', t + '.json');
     }
 
     getRouters() {
         return this.routers;
     }
 
-    getRouterList() {
+    getRouterList(t) {
         if (this.routerList.length) {
             return this.routerList
         }
 
-        return RouterList.getRouterList();
+        return RouterList.getRouterList(t);
     }
 
     /**
@@ -52,8 +53,8 @@ class RouterList {
      *
      * @return Array<Router>
      * */
-    static getRouterList() {
-        return require(RouterList.pathToRouterList);
+    static getRouterList(t = "RouterList") {
+        return require(RouterList.pathToRouterList(t));
     }
 
     /**
@@ -92,7 +93,7 @@ class RouterList {
             routerList = _router;
         }
 
-        fs.writeFile(RouterList.pathToRouterList, JSON.stringify(routerList, null, 2), (err) => {
+        fs.writeFile(RouterList.pathToRouterList(), JSON.stringify(routerList, null, 2), (err) => {
             if (err) {
                 throw new RouterListException(err.toString());
             }
@@ -136,7 +137,7 @@ class RouterList {
      * @return Boolean
      * */
     static removeRouter(_routerID) {
-        let data = require(RouterList.pathToRouterList);
+        let data = require(RouterList.pathToRouterList());
 
         if (data && RouterList.getRouterByID(_routerID)) {
             RouterList.saveRouterList(data.filter(i => i.id !== _routerID), true);
@@ -186,8 +187,8 @@ class RouterList {
      * @param {string} subdomain
      * @return Array<Router>
      * */
-    static getRoutersBySubdomain(subdomain) {
-        return RouterList.getRouterList().filter(router => router.subdomain === subdomain.trim());
+    static getRoutersBySubdomain(subdomain, t = "RouterList") {
+        return RouterList.getRouterList(t).filter(router => router.subdomain === subdomain.trim());
     }
 
     /**
@@ -196,8 +197,8 @@ class RouterList {
      * @param {string} name
      * @return Router
      * */
-    static getRouterByName(name) {
-        return RouterList.getRouterList().find(router => router.name === name.trim());
+    static getRouterByName(name, t = "RouterList") {
+        return RouterList.getRouterList(t).find(router => router.name === name.trim());
     }
 
     /**
@@ -222,12 +223,12 @@ class RouterList {
      * @param {string} _routerID
      * @return boolean | RouterListException
      * */
-    static addNewRoute(_routerID, {pathToRoute, pathLink, method} = {}) {
+    static addNewRoute(_routerID, {pathToRoute, pathLink, method} = {}, t = "RouterList") {
         if (_routerID && pathToRoute && pathLink && method) {
             const newRoute = RouterList.generateRoute({pathToRoute, pathLink, method});
             const router = RouterList.getRouterByID(_routerID);
 
-            const list = RouterList.getRouterList().filter(i => i.subdomain === router.subdomain);
+            const list = RouterList.getRouterList(t).filter(i => i.subdomain === router.subdomain);
 
             for (const item of list) {
                 for (const r of item.routes) {
@@ -257,8 +258,8 @@ class RouterList {
      * @param {string} _routeID
      * @return boolean
      * */
-    static removeRoute(_routerID, _routeID) {
-        const list = RouterList.getRouterList();
+    static removeRoute(_routerID, _routeID, t = "RouterList") {
+        const list = RouterList.getRouterList(t);
         const routerIDX = [...list].map(i => i.id).indexOf(_routerID);
 
         if (routerIDX !== -1) {
@@ -277,13 +278,13 @@ class RouterList {
      * @param {Route} obj
      * @return boolean
      * */
-    static editRoute(_routerID, _routeID, {pathToRoute, pathLink, method}) {
-        const list = RouterList.getRouterList();
+    static editRoute(_routerID, _routeID, {pathToRoute, pathLink, method}, t = "RouterList") {
+        const list = RouterList.getRouterList(t);
         const routerIDX = [...list].map(i => i.id).indexOf(_routerID);
 
         if (routerIDX !== -1) {
             if (pathLink) {
-                const _list = RouterList.getRouterList().filter(i => i.subdomain === list[routerIDX].subdomain);
+                const _list = RouterList.getRouterList(t).filter(i => i.subdomain === list[routerIDX].subdomain);
 
                 for (const item of _list) {
                     for (const r of item.routes) {
@@ -324,7 +325,7 @@ class RouterList {
     }
 
     #init() {
-        const data = this.getRouterList();
+        const data = this.getRouterList(this.listName);
 
         if (data instanceof Array) {
             for (const router of data) {
