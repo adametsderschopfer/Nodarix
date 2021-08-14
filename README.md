@@ -27,7 +27,7 @@ model User {
 
 #### get instance
 When you need using connect to db, use this code
-``js
+```js
 const dbModels = new CDatabase().getInstance();
 
 try  {
@@ -44,28 +44,38 @@ try  {
 // dbModels => models which you declare in your scheme
 ```    
 
-### Core.Environment
-##### Core.Environment::getList()
+### CEnvironment
+##### CEnvironment::getList()
 Getting all env vars
 
-##### Core.Environment::toEnvSyntax([object]obj)
+##### CEnvironment::toEnvSyntax([object]obj)
 Method transforms your object in env template 
 
-##### Core.Environment::save([string]envObj)
+##### CEnvironment::save([string]envObj)
 [CAUTION]: correctly use this method, param envObj is the result working function toEnvSyntax,
 if you include in the param incorrectly value, so you will remove all your env variables 
 
-##### Core.Environment::getConfigWithoutSystemVars()
+##### CEnvironment::getConfigWithoutSystemVars()
 Method return environment without system vars
 
-##### Core.Environment::setEnv()
+##### CEnvironment::setEnv()
 Set new variable to env config or rewrite exists
 
-##### Core.Environment::getEnvByName()
+##### CEnvironment::getEnvByName()
 Getting env by name
 
-##### Core.Environment::removeEnvByName()
+##### CEnvironment::removeEnvByName()
 Removing env by name
+
+##### CEnvironment::getConfigOfEnv()
+Method for getting environment variables
+
+##### CEnvironment::reload()
+If the file with environment variables has been changed,
+this method will make changes to the already declared "__CONFIG"
+
+[Caution] this method cannot affect the methods that used the environment variables before the reboot; to use it, you must restart the node instance
+
 
 ### Core.RouterList
 ##### Core.RouterList::getRouterList()
@@ -104,17 +114,6 @@ Edit specific route by RouterID and RouteID
 ##### Core.RouterList::getRouteByID([string]routerID, [string]routeID)
 Getting route by router id and route id
                      
-
-### Core.ConfigLoader
-##### Core.ConfigLoader::getConfigOfEnv()
-Method for getting environment variables
-
-##### Core.ConfigLoader::reload()
-If the file with environment variables has been changed,
-this method will make changes to the already declared "__CONFIG"
-
-[Caution] this method cannot affect the methods that used the environment variables before the reboot; to use it, you must restart the node instance
-
 ### Logger
 
 ##### Logger::info([string]text)
@@ -142,7 +141,7 @@ const Task = CAgent.schedule('* * * * *', () => {
 // Task.stop();
 ```
 
-### Core.DTOChecker([object]schema, [object]value)
+### CDTOValidator([object]schema, [object]value)
 ```js
 class userEntityDTO {
      firstname = { required: true, type: String }
@@ -171,18 +170,18 @@ class userEntityDTO {
  { firstname: 'John', lastname: 'Doe', birthYear: 1999, birthDay: '16', someDepthFields: { someDepthFields: { moreDepthField: { key: true } , someDepthField: 1 }, } }
  );
  
- const userDTO = new Core.DTOChecker(userEntity, userEntityDTO);
+ const userDTO = new CDTOValidator(userEntity, userEntityDTO);
  
  userDTO.validate(); // result here { valid: true }
  ```
 
-For use class Core.DTOChecker you need create class or Object with needed fields which you need check (see example above),
+For use class CDTOValidator you need create class or Object with needed fields which you need check (see example above),
 and add object which you need validate, and afer all you need call .validate method whick return validate status.
 
-### Core.FileWriter
-##### Core.FileWriter::saveFile(object { files, pathToSave, salt? })
+### CFile
+##### CFile::saveFile(object { files, pathToSave, salt? })
 ```js
-Core.FileWriter.saveFile({ files: [], pathToSave: "", salt: Date.now() });
+CFile.saveFile({ files: [], pathToSave: "", salt: Date.now() });
 ```
 =!> files - use request.$_FILES for getting coming files and save
 
@@ -204,6 +203,11 @@ following the example below
  
  module.exports = ApiException;
 ```
+
+### LocalRedirect
+```js 
+this.response.LocalRedirect('/local/redirect/path/');
+```         
 
 ## license
 Copyright 2021 Adamets Validslav

@@ -1,4 +1,4 @@
-class Helper {
+class CHelper {
     static checkIsAsyncFunction(fn) {
         return fn && fn.constructor.name === 'AsyncFunction';
     }
@@ -12,7 +12,7 @@ class Helper {
         return new Promise(async (fulfilled, rej) => {
             try {
                 if (fn) {
-                    if (Helper.checkIsAsyncFunction(fn)) {
+                    if (CHelper.checkIsAsyncFunction(fn)) {
                         const res = await fn();
                         fulfilled(res);
                     } else {
@@ -74,18 +74,26 @@ class Helper {
         if (!sources.length) return target;
         const source = sources.shift();
 
-        if (Helper.isObject(target) && Helper.isObject(source)) {
+        if (CHelper.isObject(target) && CHelper.isObject(source)) {
             for (const key in source) {
-                if (Helper.isObject(source[key])) {
+                if (CHelper.isObject(source[key])) {
                     if (!target[key]) Object.assign(target, {[key]: {}});
-                    Helper.mergeDeep(target[key], source[key]);
+                    CHelper.mergeDeep(target[key], source[key]);
                 } else {
                     Object.assign(target, {[key]: source[key]});
                 }
             }
         }
 
-        return Helper.mergeDeep(target, ...sources);
+        return CHelper.mergeDeep(target, ...sources);
+    }
+
+    static normalizePathToJS(_path) {
+        if (_path.endsWith('.js')) {
+           return k.substring(k.length - 3, 0);
+        }
+
+        return _path;
     }
 
     /** str => string like: /:id */
@@ -103,6 +111,8 @@ class Helper {
 
     static parseUrlPathOfSlashesWithParams(_str) {
         let pathResult = [];
+
+        _str = CHelper.normalizeUrlSlashes(_str);
 
         function localProcessing(str) {
             if (str === "/") {
@@ -153,4 +163,4 @@ class Helper {
     }
 }
 
-module.exports = Helper;
+module.exports = CHelper;

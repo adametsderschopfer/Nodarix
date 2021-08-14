@@ -1,4 +1,4 @@
-class DB {
+class CDatabase {
     constructor() {
         if (DB.init) {
             return DB.instance;
@@ -15,4 +15,4 @@ class DB {
     }
 }
 
-module.exports = DB;
+module.exports = CDatabase;

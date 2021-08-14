@@ -8,8 +8,8 @@ class HttpBasicAuthorization {
         if (
             login &&
             password &&
-            login === __CONFIG.HTTP_BASIC_AUTH_LOGIN &&
-            password === __CONFIG.HTTP_BASIC_AUTH_PASSWORD
+            login === CEnvironment.getVars().HTTP_BASIC_AUTH_LOGIN &&
+            password === CEnvironment.getVars().HTTP_BASIC_AUTH_PASSWORD
         ) {
             return Promise.resolve();
         }

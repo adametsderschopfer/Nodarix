@@ -3,8 +3,6 @@
  * Version: 1.0.0
  */
 
-const Helper = require("./Helper");
-
 class RouterFactory {
     get pathModule() {
         return require("path");
@@ -15,13 +13,13 @@ class RouterFactory {
             throw new SyntaxError("[RouterFactory]: params is not defined");
         }
 
-        this.CALLBACK_PROP = Core.Helper.wrapLikeNotRoute("callbacks");
-        this.PARAM_PROP = Core.Helper.wrapLikeNotRoute("param");
+        this.CALLBACK_PROP = CHelper.wrapLikeNotRoute("callbacks");
+        this.PARAM_PROP = CHelper.wrapLikeNotRoute("param");
         this.subdomain = params.subdomain || ""
         this.SemanticURLs = params.SemanticURLs || {};
         this.id = params.id;
 
-        this.path = params.path || this.pathModule.join(__CONFIG.root, "server", "Routing");
+        this.path = params.path || this.pathModule.join(CEnvironment.getVars().root, "server", "Routing");
 
         this.uris = {
             GET: {},
@@ -44,12 +42,12 @@ class RouterFactory {
     }
 
     async execute(req, res) {
-        req.params = {};
+        req.$_PARAMS = {};
 
         const workingMethodStack = this.uris[req.method];
 
         if (workingMethodStack) {
-            const branches = Core.Helper.parseUrlPathOfSlashesWithParams(req.url);
+            const branches = CHelper.parseUrlPathOfSlashesWithParams(req.url);
 
             let steps = [];
             let lastIdx = branches.length - 1;
@@ -84,7 +82,7 @@ class RouterFactory {
                             let validKey = "";
 
                             for (const k in localStepObj) {
-                                let __param__ = Core.Helper.isParamKey(k);
+                                let __param__ = CHelper.isParamKey(k);
                                 if (__param__) {
                                     validKey = k;
                                     param = {...param, [__param__[this.PARAM_PROP]]: steps[j].split("/").join("")};
@@ -126,22 +124,24 @@ class RouterFactory {
             }
 
             if (param) {
-                req.params = {...req.params, ...param};
+                req.$_PARAMS = {...req.$_PARAMS, ...param};
             }
 
             for (const callback of callbacks[this.CALLBACK_PROP]) {
-                const cb = Core.Helper.isES6Class(callback) ?
-                    (() => {
-                        const c = new callback({req, res});
-                        return c.result.bind(c);
-                    })() :
-                    Core.Helper.isFunction(callback) ? callback.bind(this, req, res) : undefined;
+                let callbackResult;
 
-                if (!cb) {
+                if (CHelper.isES6Class(callback)) {
+                    const _class = new callback({req, res});
+                    callbackResult = _class.result.bind(_class);
+                } else if (CHelper.isFunction(callback)) {
+                    callbackResult = callback.bind(this, req, res);
+                }
+
+                if (!callbackResult) {
                     throw new TypeError("Callback is not a Function or Class");
                 }
 
-                await Core.Helper.executeAsyncOrNotFunction(cb);
+                await CHelper.executeAsyncOrNotFunction(callbackResult);
             }
         } else {
             console.warn("[RouterFactory]: nothing routes exists in " + req.method + " method");
@@ -151,7 +151,7 @@ class RouterFactory {
     }
 
     register(method, url, ...callbacks) {
-        if (Core.Helper.checkMethodExists(method)) {
+        if (CHelper.checkMethodExists(method)) {
             if (!url) {
                 throw new Error("[RouterFactory]: url must be declare!");
             }
@@ -160,7 +160,7 @@ class RouterFactory {
                 throw new Error("[RouterFactory]: callback 's for" + url + " must be declared");
             }
 
-            const branches = Core.Helper.parseUrlPathOfSlashesWithParams(Helper.normalizeUrlSlashes(url));
+            const branches = CHelper.parseUrlPathOfSlashesWithParams(CHelper.normalizeUrlSlashes(url));
 
             let branchLines = {};
 
@@ -187,7 +187,7 @@ class RouterFactory {
                             iterateUrlsProps(obj[property]);
 
                             if (property === branches[branches.length - 1]) {
-                                obj[property] = {[this.CALLBACK_PROP]: callbacks, ...makeParams(Core.Helper.isParamKey(property)[this.PARAM_PROP])};
+                                obj[property] = {[this.CALLBACK_PROP]: callbacks, ...makeParams(CHelper.isParamKey(property)[this.PARAM_PROP])};
                             }
                         }
                     }
@@ -195,7 +195,7 @@ class RouterFactory {
                 return obj;
             }
 
-            Core.Helper.mergeDeep(this.uris[method], iterateUrlsProps(branchLines));
+            CHelper.mergeDeep(this.uris[method], iterateUrlsProps(branchLines));
         } else {
             throw new Error("[RouterFactory]: METHOD  IS NOT ALLOWED");
         }

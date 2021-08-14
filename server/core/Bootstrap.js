@@ -1,14 +1,13 @@
+require('./core');
+
 class Bootstrap {
     static beforeInit(cb = function (){}) {
         return cb;
     }
 
     static init() {
-        require('./core');
-
         require('./components/ThreadControl').clusterize(() => {
             const ServerResponseProps = require('./ServerResponseProps');
-            const Helper = require("./Helper");
             const StaticFiles = require("./components/StaticFiles");
             const BodyParser = require("./components/BodyParser");
 
@@ -31,13 +30,13 @@ class Bootstrap {
                 static get vars() {
                     return {
                         config: {
-                            PORT: __CONFIG.PORT,
+                            PORT: CEnvironment.getVars().PORT,
                         },
                     }
                 }
 
                 async beforeInit() {
-                    await Helper.executeAsyncOrNotFunction(Bootstrap.beforeInit());
+                    await CHelper.executeAsyncOrNotFunction(Bootstrap.beforeInit());
                 }
 
                 async afterInit(serverInstance) {
@@ -50,11 +49,11 @@ class Bootstrap {
                     const {searchParams} = new URL(host + req.url);
 
                     res = new ServerResponseProps(res).init();
-                    req.$_QUERY = Helper.getQueryParams(searchParams);
+                    req.$_QUERY = CHelper.getQueryParams(searchParams);
                     req.$_BODY = {};
                     req.$_FILES = [];
 
-                    if (/[http:\/\/|https:\/\/]static/.test(host) || req.url.replace('\/', "").split("\/")[0] === (__CONFIG.STATIC_DIR || "static")) {
+                    if (/[http:\/\/|https:\/\/]static/.test(host) || req.url.replace('\/', "").split("\/")[0] === (CEnvironment.getVars().STATIC_DIR || "static")) {
                         new StaticFiles({req,res}).process();
                         return;
                     }

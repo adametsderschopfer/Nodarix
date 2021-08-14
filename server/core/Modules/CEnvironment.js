@@ -1,15 +1,64 @@
 const EnvironmentException = require("../Exceptions/EnvironmentException");
 const path = require("path");
 const fs = require("fs");
+const {define} = require('../utils');
 
-class Environment {
+let isFirst = true;
+
+class CEnvironment {
+    path = require('path');
+    dotenv = require('../../Libs/dotenv');
+    root = process.cwd();
+
+    #obj = {};
+
+    constructor() {
+        if (!isFirst) {
+            return;
+        }
+
+        this.#obj = Object.create({});
+        this.reload();
+        isFirst = false;
+        Logger.info('[MODULE::CEnvironment] => was initialize');
+    }
+
+    getVars() {
+        return this.#obj;
+    }
+
+    reload() {
+        try {
+            const envs = this.getEnv();
+
+            Object.assign(this.#obj, {
+                root: this.root,
+                isDev: process.env.NODE_ENV === 'development',
+                isProd: process.env.NODE_ENV === 'production',
+                NODE_ENV: process.env.NODE_ENV,
+                ...envs
+            });
+        } catch (e) {
+            Logger.info('[MODULE::CEnvironment] => something went wrong =>' + JSON.stringify(e));
+        }
+
+        if (!isFirst) {
+            Logger.info('[MODULE::CEnvironment] => CEnvironment updated');
+        }
+    }
+
+    getEnv() {
+        Logger.info('[MODULE::CEnvironment] => Getting environment...');
+        return (this.dotenv.config({path: this.path.join(this.root, `.env`)}).parsed);
+    }
+
     static ignoreFields = ['root', 'isDev', 'isProd', 'NODE_ENV']
 
     /**
      * @return Route
      * */
     static getList() {
-        return __CONFIG;
+        return CEnvironment.getVars();
     }
 
     /*
@@ -42,12 +91,12 @@ class Environment {
             throw new EnvironmentException('envObj is not defined');
         }
 
-        fs.writeFile(path.join(__CONFIG.root, "server/config/env/." + __CONFIG.NODE_ENV + '.env'), envObj, 'utf-8', (err) => {
+        fs.writeFile(path.join(CEnvironment.getVars().root, '.env'), envObj, 'utf-8', (err) => {
             if (err) {
                 throw new EnvironmentException(err.toString());
             }
 
-            Core.ConfigLoader.reload();
+            CEnvironment.reload();
         });
     }
 
@@ -57,9 +106,9 @@ class Environment {
      * @return {object}
      * */
     static getConfigWithoutSystemVars() {
-        const conf = {...Environment.getList()}
+        const conf = {...CEnvironment.getList()}
 
-        for (const field of Environment.ignoreFields) {
+        for (const field of CEnvironment.ignoreFields) {
             delete conf[field];
         }
 
@@ -81,10 +130,10 @@ class Environment {
             throw new EnvironmentException("value is not defined");
         }
 
-        const obj = Environment.getConfigWithoutSystemVars();
+        const obj = CEnvironment.getConfigWithoutSystemVars();
 
         obj[name] = value;
-        Environment.save(Environment.toEnvSyntax(obj));
+        CEnvironment.save(CEnvironment.toEnvSyntax(obj));
     }
 
     /**
@@ -92,7 +141,7 @@ class Environment {
      * @return {string}
      * */
     static getEnvByName(name) {
-        return Environment.getConfigWithoutSystemVars()[name] || null;
+        return CEnvironment.getConfigWithoutSystemVars()[name] || null;
     }
 
     /**
@@ -102,11 +151,11 @@ class Environment {
         if (!name) {
             throw new EnvironmentException("name is not defined");
         }
-        const obj = Environment.getConfigWithoutSystemVars();
+        const obj = CEnvironment.getConfigWithoutSystemVars();
 
         delete obj[name];
-        Environment.save(Environment.toEnvSyntax(obj));
+        CEnvironment.save(CEnvironment.toEnvSyntax(obj));
     }
 }
 
-module.exports = Environment;
+module.exports = CEnvironment;

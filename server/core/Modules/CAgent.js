@@ -1,4 +1,4 @@
-class Agent {
+class CAgent {
    static schedule(...args) {
        return require('node-cron').schedule(...args);
    }
@@ -8,6 +8,4 @@ class Agent {
    }
 }
 
-require('../utils').define('CAgent', Agent);
-
-module.exports = Agent;
+module.exports = CAgent;

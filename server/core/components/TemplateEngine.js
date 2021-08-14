@@ -11,7 +11,7 @@ class TemplateEngine {
     
     constructor({engine} = { engine: undefined }) {
         this.#engine = engine;   
-        this.templatesPath = path.join(__CONFIG.root + '/server/Templates/');
+        this.templatesPath = path.join(CEnvironment.getVars().root + '/server/Templates/');
     }
 
     changeLoadStackState(data = {}) {

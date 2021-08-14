@@ -1,5 +1,4 @@
 const http = require('http');
-const Helper = require('./Helper')
 
 class HTTPServer {
     vars = undefined;
@@ -34,8 +33,8 @@ class HTTPServer {
 
     async #handle(req, res) {
         try {
-            await Helper.executeAsyncOrNotFunction(this.beforeHandleStart.bind(this, req, res));
-            await Helper.executeAsyncOrNotFunction(this.afterHandleStart.bind(this, req, res));
+            await CHelper.executeAsyncOrNotFunction(this.beforeHandleStart.bind(this, req, res));
+            await CHelper.executeAsyncOrNotFunction(this.afterHandleStart.bind(this, req, res));
         } catch (e) {
             console.error(e);
         }
@@ -51,9 +50,9 @@ class HTTPServer {
         }
 
         try {
-            await Helper.executeAsyncOrNotFunction(this.beforeInit);
+            await CHelper.executeAsyncOrNotFunction(this.beforeInit);
             this.serverInstance = http.createServer(this.#handle.bind(this));
-            await Helper.executeAsyncOrNotFunction(this.afterInit.bind(this, this.serverInstance));
+            await CHelper.executeAsyncOrNotFunction(this.afterInit.bind(this, this.serverInstance));
         } catch (e) {
             console.error(e);
         }

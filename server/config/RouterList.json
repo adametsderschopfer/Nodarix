@@ -10,6 +10,12 @@
         "pathToRoute": "/api/news/GetAll",
         "pathLink": "/news",
         "method": "GET"
+      },
+      {
+        "id": "JASFIUgv8f7GSAFas",
+        "pathToRoute": "/api/news/GetAll",
+        "pathLink": "/news/get",
+        "method": "GET"
       }
     ]
   }

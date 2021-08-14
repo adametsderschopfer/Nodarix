@@ -5,7 +5,7 @@ class StaticFiles {
     constructor({ req, res}) {
         this.req = req;
         this.res = res;
-        this.staticFilePath = path.join(__CONFIG.root, (/[http:\/\/|https:\/\/]static/.test("http://" + req.headers.host) ? "static" : ""), this.req.url);
+        this.staticFilePath = path.join(CEnvironment.getVars().root, (/[http:\/\/|https:\/\/]static/.test("http://" + req.headers.host) ? "static" : ""), this.req.url);
     }
 
     process() {

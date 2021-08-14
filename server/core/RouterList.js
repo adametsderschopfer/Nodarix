@@ -2,7 +2,6 @@ const path = require('path');
 const fs = require('fs');
 const uuid = require('uuid').v4;
 const RouterListException = require('./Exceptions/RouterListException');
-const Helper = require("./Helper");
 
 /**
  * @typedef {{ id?: string, name?: string, subdomain?: string, pathToErrorPage?: string, routes: Array }} Router
@@ -33,7 +32,7 @@ class RouterList {
      * @return string
      * */
     static get pathToRouterList() {
-        return path.join(__CONFIG.root, 'server/config', 'RouterList.json');
+        return path.join(CEnvironment.getVars().root, 'server/config', 'RouterList.json');
     }
 
     getRouters() {
@@ -122,7 +121,7 @@ class RouterList {
             id,
             name: name?.trim() || uuid(),
             subdomain: subdomain?.trim() || "",
-            pathToErrorPage: pathToErrorPage?.trim() || "",
+            pathToErrorPage: CHelper.normalizePathToJS(pathToErrorPage?.trim()) || "",
             routes: routes.length ? routes.map(RouterList.generateRoute) : routes,
         }
 
@@ -161,10 +160,10 @@ class RouterList {
         if (routerIDX !== -1) {
             list[routerIDX]['name'] = name?.trim() || list[routerIDX]['name'];
             list[routerIDX]['subdomain'] = subdomain?.trim() || list[routerIDX]['subdomain'];
-            list[routerIDX]['pathToErrorPage'] = pathToErrorPage?.trim() || list[routerIDX]['pathToErrorPage'];
+            list[routerIDX]['pathToErrorPage'] = CHelper.normalizePathToJS(pathToErrorPage?.trim()) || list[routerIDX]['pathToErrorPage'];
             list[routerIDX]['routes'] = routes || list[routerIDX]['routes'];
 
-            RouterList.saveRouterList(list, true)
+            RouterList.saveRouterList(list, true);
             return true;
         }
 
@@ -210,7 +209,7 @@ class RouterList {
     static generateRoute({pathToRoute, pathLink, method}) {
         if (pathToRoute && pathLink && method) {
 
-            return ({id: uuid(), method: method.trim(), pathLink: Helper.normalizeUrlSlashes(pathLink).trim(), pathToRoute: pathToRoute.trim()});
+            return ({id: uuid(), method: method.trim(), pathLink: CHelper.normalizeUrlSlashes(pathLink).trim(), pathToRoute: pathToRoute.trim()});
         }
 
         throw new RouterListException('Invalid route: [' + "pathToRoute: " + pathToRoute + " pathLink: " + pathLink + " method: " + method + ']');
@@ -345,7 +344,7 @@ class RouterList {
 
             async errorHandler(req, res) {
                 try {
-                    const errorModule = require(path.join(__CONFIG.root, 'server', 'Routing', _router.pathToErrorPage));
+                    const errorModule = require(path.join(CEnvironment.getVars().root, 'server', 'Routing', _router.pathToErrorPage));
                     await errorModule.include(req, res);
                 } catch (e) {
                     res.end('400 SOMETHING WENT WRONG');
@@ -356,7 +355,7 @@ class RouterList {
                 if (_router.routes.length) {
                     for (const route of _router.routes) {
                         if (route.method && route.pathLink && route.pathToRoute) {
-                            this.register(route.method, route.pathLink, require(path.join(__CONFIG.root, 'server', 'Routing', route.pathToRoute)));
+                            this.register(route.method, route.pathLink, require(path.join(CEnvironment.getVars().root, 'server', 'Routing', route.pathToRoute)));
                         }
                     }
                 }

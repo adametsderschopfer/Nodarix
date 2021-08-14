@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-class FileWriter {
+class CFile {
     static saveFile({files = [], pathToSave = "", salt = ""}) {
         const status = { done: false, err: undefined };
 
@@ -9,7 +9,7 @@ class FileWriter {
            return status;
         }
 
-        const pathWithStatic = path.join(__CONFIG.root, "static", pathToSave);
+        const pathWithStatic = path.join(CEnvironment.getVars().root, "static", pathToSave);
 
         const __save = (f) => {
             if (f?.path?.length) {
@@ -42,4 +42,4 @@ class FileWriter {
     }
 }
 
-module.exports = FileWriter;
+module.exports = CFile;

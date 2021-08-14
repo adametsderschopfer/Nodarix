@@ -1,15 +1,18 @@
 const RouterListModule = require('./RouterList');
-const Helper = require("./Helper");
 const RouterList = new RouterListModule();
+const path = require('path');
 
 const routers = RouterList.getRouters();
 
 module.exports = {
     async init({host, req, res}) {
-        const failed = () => {
-            res.end("<h1>503 ROUTER IS FAILED</h1>");
+        const failed = (e = { error: "Y" }) => {
+            res.end(`
+                <h1>503 ROUTER IS FAILED</h1>
+                <br/>
+                <pre>${e}</pre> 
+            `);
         }
-
         if (routers instanceof Array && routers.length) {
             const foundRouterModules = routers.filter(rm => new RegExp(String.raw`[http:\\/\\/|https:\\/\\/]${rm?.subdomain}`).test(host));
 
@@ -20,7 +23,7 @@ module.exports = {
 
             const subdomain = foundRouterModules[0].subdomain;
             const routersBySubdomain = RouterListModule.getRoutersBySubdomain(subdomain);
-            const _url = Helper.normalizeUrlSlashes(req.url);
+            const _url = CHelper.normalizeUrlSlashes(req.url);
             let resultModuleID = null;
 
             for (const routerStructure of routersBySubdomain) {
@@ -41,6 +44,18 @@ module.exports = {
                 }
             }
 
+            if (!resultModuleID) {
+                if (routersBySubdomain[0] && routersBySubdomain[0]?.pathToErrorPage) {
+                    try {
+                        require(path.join(__dirname, '../Routing/' + routersBySubdomain[0]?.pathToErrorPage)).include(req, res);
+                    } catch (e) {
+                        failed(e);
+                    }
+                } else {
+                    failed();
+                }
+            }
+
             for (const router of foundRouterModules) {
                 if (router.id === resultModuleID) {
                     if (router instanceof Core.RouterFactory) {
@@ -52,7 +67,6 @@ module.exports = {
                     break;
                 }
             }
-
         } else {
             failed();
         }

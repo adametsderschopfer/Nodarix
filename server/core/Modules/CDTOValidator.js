@@ -34,33 +34,33 @@
  *  { firstname: 'John', lastname: 'Doe', birthYear: 1999, birthDay: '16', someDepthFields: { someDepthFields: { moreDepthField: { key: true } , someDepthField: 1 }, } }
  *  );
  *  
- *  const userDTO = new Core.DTOChecker(userEntity, userEntityDTO);
+ *  const userDTO = new Core.CDTOValidator(userEntity, userEntityDTO);
  * */
 
 /**
  * @namespace Core
- * @class DTOChecker
+ * @class CDTOValidator
  * */
-class DTOChecker {
+class CDTOValidator {
     value = undefined;
     DTO = undefined;
     valid = false;
 
     constructor(value, DTO) {
         if (!value) {
-            throw DTOChecker.Exception(`{ value } can't be undefined`);
+            throw CDTOValidator.Exception(`{ value } can't be undefined`);
         }
 
         if (!DTO) {
-            throw DTOChecker.Exception(`{ DTO } can't be undefined`);
+            throw CDTOValidator.Exception(`{ DTO } can't be undefined`);
         }
 
         if (!(DTO instanceof Object)) {
-            throw DTOChecker.Exception(`{ DTO } should be an object`);
+            throw CDTOValidator.Exception(`{ DTO } should be an object`);
         }
 
         if (!(value instanceof Object)) {
-            throw DTOChecker.Exception(`{ value } should be an object`);
+            throw CDTOValidator.Exception(`{ value } should be an object`);
         }
 
         this.value = value;
@@ -82,7 +82,7 @@ class DTOChecker {
         }
 
         if (!schema) {
-            return {valid: false, ...DTOChecker.Exception('incorrectly schema constructor')}
+            return {valid: false, ...CDTOValidator.Exception('incorrectly schema constructor')}
         }
 
         this.valid = true;
@@ -90,27 +90,27 @@ class DTOChecker {
         function checkSchema(_valObjKey, __schema) {
             if (!ignoreNotExistsFields) {
                 if (!_valObjKey) {
-                    errorProps = DTOChecker.Exception(`_valObjKey is undefined.`);
+                    errorProps = CDTOValidator.Exception(`_valObjKey is undefined.`);
                     return false;
                 }
 
                 if (!__schema[_valObjKey]) {
-                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } is not declare in DTO.`);
+                    errorProps = CDTOValidator.Exception(`Key { ${_valObjKey} } is not declare in DTO.`);
                     return false;
                 }
 
                 if (!__schema[_valObjKey].hasOwnProperty('required')) {
-                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } hasn't important property => [required], please add that prop.`);
+                    errorProps = CDTOValidator.Exception(`Key { ${_valObjKey} } hasn't important property => [required], please add that prop.`);
                     return false;
                 }
 
                 if (typeof __schema[_valObjKey].required !== 'boolean') {
-                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } required should be a Boolean type.`);
+                    errorProps = CDTOValidator.Exception(`Key { ${_valObjKey} } required should be a Boolean type.`);
                     return false;
                 }
 
                 if (!__schema[_valObjKey].hasOwnProperty('type')) {
-                    errorProps = DTOChecker.Exception(`Key { ${_valObjKey} } hasn't important property => [type], please add that prop.`);
+                    errorProps = CDTOValidator.Exception(`Key { ${_valObjKey} } hasn't important property => [type], please add that prop.`);
                     return false;
                 }
             }
@@ -156,7 +156,7 @@ class DTOChecker {
         if (!checkFieldsExistsResult.flag) {
             if (!ignoreNotExistsFields) {
                 if (!checkFieldsExistsResult.checkSchemaError) {
-                    errorProps = DTOChecker.Exception(`Key { ${checkFieldsExistsResult.key} } of validate object does not exists in validation schema`);
+                    errorProps = CDTOValidator.Exception(`Key { ${checkFieldsExistsResult.key} } of validate object does not exists in validation schema`);
                 }
 
                 this.valid = false;
@@ -184,14 +184,14 @@ class DTOChecker {
 
                         const result = stackTypesOfArray.filter(v => v.valid);
                         if (!result.length) {
-                            errorProps = DTOChecker.Exception(`The value { ${__val__} } has nothing to do with the types of array { ${__schemaItem__.type} }`);
+                            errorProps = CDTOValidator.Exception(`The value { ${__val__} } has nothing to do with the types of array { ${__schemaItem__.type} }`);
                             return false;
                         }
                     } else if (__schemaItem__.type === 'any') {
                         return true;
                     } else {
                         if (__valueType__ !== __schemaItem__.type) {
-                            errorProps = DTOChecker.Exception(`The value { ${__val__} } has nothing to do with the type { ${__schemaItem__.type} }`);
+                            errorProps = CDTOValidator.Exception(`The value { ${__val__} } has nothing to do with the type { ${__schemaItem__.type} }`);
                             return false;
                         }
                     }
@@ -210,7 +210,7 @@ class DTOChecker {
                         switch (__valueType__) {
                             case String: {
                                 if (!__val__.length) {
-                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is empty string, which is required!`);
+                                    errorProps = CDTOValidator.Exception(`The key { ${__valObjKey__} } is empty string, which is required!`);
                                     return false;
                                 }
                                 break;
@@ -218,7 +218,7 @@ class DTOChecker {
 
                             case Number: {
                                 if (isNaN(__val__)) {
-                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is NaN, which is required!`);
+                                    errorProps = CDTOValidator.Exception(`The key { ${__valObjKey__} } is NaN, which is required!`);
                                     return false;
                                 }
                                 break;
@@ -226,7 +226,7 @@ class DTOChecker {
 
                             case Object: {
                                 if (!Object.keys(__val__).length) {
-                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is empty object, which is required!`);
+                                    errorProps = CDTOValidator.Exception(`The key { ${__valObjKey__} } is empty object, which is required!`);
                                     return false;
                                 }
                                 break;
@@ -234,7 +234,7 @@ class DTOChecker {
 
                             case Array: {
                                 if (!__val__.length) {
-                                    errorProps = DTOChecker.Exception(`The key { ${__valObjKey__} } is empty array, which is required!`);
+                                    errorProps = CDTOValidator.Exception(`The key { ${__valObjKey__} } is empty array, which is required!`);
                                     return false;
                                 }
                                 break;
@@ -282,8 +282,8 @@ class DTOChecker {
     }
 
     static Exception(string) {
-        return ({message: `[DTOChecker]: ${string}\t`});
+        return ({message: `[CDTOValidator]: ${string}\t`});
     }
 }
 
-module.exports = DTOChecker;
+module.exports = CDTOValidator;

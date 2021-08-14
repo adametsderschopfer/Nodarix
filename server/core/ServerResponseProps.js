@@ -10,7 +10,7 @@ class ServerResponseProps {
     }
 
     LocalRedirect(url = '/') {
-        this.statusCode = 302;
+        this.statusCode = 301;
         this.setHeader('Location', url);
     }
 
@@ -27,7 +27,7 @@ class ServerResponseProps {
         this.res.ended = false;
         this.res._end = this.res.end;
         this.res.end = this.end;
-        this.res.redirect = this.redirect;
+        this.res.LocalRedirect = this.LocalRedirect;
         this.res.showError = this.showError;
         this.res.templates = require('./components/TemplateEngine');
 

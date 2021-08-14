@@ -1,24 +1,23 @@
 const {define} = require('./utils');
+const CEnvironment = require('./Modules/CEnvironment')
 
 define('Logger', require('./components/Logger'));
+define('CConfig', require('./Modules/CConfig'))
+define('CHelper', require('./Modules/CHelper'))
 
 define('Core', Object.create({
-    ConfigLoader: require('./ConfigLoader'),
     HTTPServer: require('./HTTPServer'),
-    FileWriter: require('./components/FileWriter'),
-    Environment: require('./Modules/Environment'),
-    Helper: require('./Helper'),
-    Route: require('./Route'),
     Route: require('./Route'),
     RouterList: require('./RouterList'),
     RouterFactory: require('./RouterFactory'),
-    DTOChecker: require('./components/DTOChecker')
 }));
 
-define('CDatabase', require('./DB'))
+define('CLocalCache', require('./Modules/CLocalCache'))
+define('CDTOValidator', require('./Modules/CDTOValidator'))
+define('CEnvironment', new CEnvironment())
+define('CDatabase', require('./Modules/CDatabase'))
+define('CFile', require('./Modules/CFile'))
+define('CAgent', require('./Modules/CAgent'));
 
-/*
-* init modules
-* */
-
-require('./Modules/Agent');
+ 
+                              
